@@ -17,6 +17,9 @@
       #navbarSupportedContent ul li a{
         color: white;
       }
+      #navbar-brand{
+        color: white;
+      }
       #oval{
           /* width: 220px;
           height: 100px;
@@ -29,7 +32,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar nav-default navbar-expand-lg fixed-top" style="background-color: rgba(0, 0, 0,0.75);">
+    <nav class="navbar nav-default navbar-expand-lg fixed-top" style="background-color: rgba(0, 0, 0,0.50);">
       <div class="container-fluid">
           <a class="navbar-brand" href="#">
             <img src="https://raw.githubusercontent.com/viveksai24/Guest_lecture_full_stack/main/images/logo_glm-removebg-preview.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
@@ -44,7 +47,7 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
+              <a class="nav-link" href="about.html">About Us</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,8 +64,27 @@
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
             </li> -->
           </ul>
+          
+          <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                Hello
+              </li>
+
+            </ul>
+          </div> -->
+
           <form class="d-flex">
-            <button class="btn btn-outline-success" style="color: black;">login</button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  Hello <
+                </li>
+  
+              </ul>
+            </div>
+
+            <button class="btn" style="color: black;"><img src="https://raw.githubusercontent.com/viveksai24/Guest_lecture_full_stack/main/images/logout_orange.png"  width="25" height="25"></button>
             <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
           </form>
         </div>
