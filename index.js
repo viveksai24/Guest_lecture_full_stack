@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+ 
+var sessionstorage = require('sessionstorage');
 // var path = require('path');
 app.use(bodyParser.urlencoded({extendend: true}));
 
@@ -9,22 +11,29 @@ app.use(bodyParser.urlencoded({extendend: true}));
 app.set('view engine', 'ejs');
 // app.use(express.static(path.join(__dirname+'stylesheet')));
 
-var globalUsername = '';
+//linking style sheets in stylesheets directory 
+app.use(express.static("stylesheets"));
+
+
 // app.get('/header',function)
 app.get('/about',function(req,res){
-    console.log(req.body);
-    res.render('about',{username: globalUsername});
+    console.log(req.url);
+    res.render('about',{username: sessionstorage.getItem('username')});
 });
 
 app.get('/stuDash',function(req,res){
-    res.render('stu_dash',{username: globalUsername});
+    res.render('teacher_dash',{username: sessionstorage.getItem('username')});
 });
 
 app.post('/stuDash',function(req,res){
     console.log(req.body);
     // console.log(req.body.username);
-    globalUsername = req.body.username;
-    res.render('stu_dash',{username: globalUsername});
+    sessionstorage.setItem('username',req.body.username);
+    res.render('teacher_dash',{username: sessionstorage.getItem('username')});
+});
+
+app.post('/added_event',function(req,res){
+    console.log(req.body);
 });
 
 app.get('/',function(req,res){

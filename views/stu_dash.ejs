@@ -1,42 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Guest Lecture Maintenance V1</title>   
+    <link rel = "icon" href = "https://raw.githubusercontent.com/viveksai24/Guest_lecture_full_stack/main/images/logo_glm-removebg-preview.png" type = "image/x-icon"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="/stylesheets/about_style.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/test.css"> -->
+
+    <!-- dashboards -->
+    
+
+    <style>
+      #oval_parent{
+          background: #eee;
+          width:200px;
+          height:120px;
+          overflow:hidden;
+      }
+      #navbarSupportedContent ul li a{
+        color: white;
+      }
+      #navbar-brand{
+        color: white;
+      }
+      #oval{
+          /* width: 220px;
+          height: 100px;
+          margin:10px 0 0 -10px;  
+          background: white; */
+          -moz-border-radius: 100px / 50px;
+          -webkit-border-radius: 100px / 50px;
+          border-radius: 100px / 50px;
+      }
+    </style>
+  </head>
+
+
 <%- include('header',{username:username}); -%>
 
-<!-- Cards-->
-<section class="vh-100" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-lg-9 col-xl-7">
-          <div class="card" style="border-radius: 50%;">
-            <!-- <div id="oval_parent">
-              <div id="oval"> -->
-                
-              
-                <div class="card-body p-5">    
-                  <div class="text-center mb-4 pb-2">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-quotes/bulb.webp"
-                      alt="Bulb" width="100">
-                  </div>
-          
-                  <figure class="text-center mb-0">
-                    <blockquote class="blockquote">
-                      <p class="pb-3">
-                        <i class="fas fa-quote-left fa-xs text-primary"></i>
-                        <span class="lead font-italic">Lectures which really teach will never be popular;
-                        lectures which are popular will never really teach.
-                       </span>
-                        <i class="fas fa-quote-right fa-xs text-primary"></i>
-                      </p>
-                    </blockquote>
-                    <figcaption class="blockquote-footer mb-0">
-                      Michael Faraday
-                    </figcaption>
-                  </figure>
-                </div>
-              <!-- </div>
-            </div>   -->
-          </div>
+  <div id="page-container" class="snipcss-7flpI">
+    <noscript>
+        <div id="noscript">
+            This site works best with JavaScript enabled.
         </div>
-      </div>
-    </div>
-  </section>
+    </noscript>
+    <br>
+    <main id="content"
+        class="tether-target-attached-top tether-element-attached-top tether-element-attached-center tether-target-attached-center">
+        <div class="page-title">
+            <div class="tabs">
+                <h2>
+                    Events
+                </h2>
+                <span class="spacer">
+            </div>
+        </div>
+        <div id="content-body">
+            <div class="content-description">
+                <h4>
+                    Ongoing Events
+                </h4>
+                <table class="contest-list table striped">
+                    <thead>
+                        <tr>
+                            <th class="snipcss0-0-0-1 tether-target-attached-top tether-element-attached-top tether-element-attached-center tether-target-attached-center style-EEfqb"
+                                id="style-EEfqb">
+                                Events
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="contest-block">
+                                    <a href="/contest/eval1csea" class="contest-list-title">
+                                        Software Engineering
+                                    </a>
+                                    <span class="contest-tags">
+                                    </span>
+                                    <br>
+                                    <span class="time">
+                                        Starting in
+                                        <span data-secs="44419.879971" class="time-remaining">
+                                            12:12:43
+                                        </span>
+                                        .
+                                    </span>
+                                    <div class="time time-left">
+                                        May 10, 2023, 11:30
+                                        <br>
+                                        02:00 long
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <h4>
+                    Upcoming Events
+                </h4>
+                <table class="contest-list table striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Events
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="contest-block">
+                                    <a href="/contest/eval1csea" class="contest-list-title">
+                                        Data Structures and Algorithms
+                                    </a>
+                                    <span class="contest-tags">
+                                    </span>
+                                    <br>
+                                    <span class="time">
+                                        Starting in
+                                        <span data-secs="44419.879971" class="time-remaining">
+                                            12:12:43
+                                        </span>
+                                        .
+                                    </span>
+                                    <div class="time time-left">
+                                        May 10, 2023, 11:30
+                                        <br>
+                                        02:00 long
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <h4>
+                    Past Events
+                </h4>
+                <table class="contest-list table striped">
+                    <thead>
+                        <tr>
+                            <th id="style-bby3d" class="style-bby3d">
+                                Events
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="contest-block">
+                                    <a href="/contest/eval1csea" class="contest-list-title">
+                                        Web 3
+                                    </a>
+                                    <span class="contest-tags">
+                                    </span>
+                                    <br>
+                                    <span class="time">
+                                        Starting in
+                                        <span data-secs="44419.879971" class="time-remaining">
+                                            12:12:43
+                                        </span>
+                                        .
+                                    </span>
+                                    <div class="time time-left">
+                                        May 10, 2023, 11:30
+                                        <br>
+                                        02:00 long
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <br>
+    <br>
+</div>
 
   <%- include('footer'); -%>
+
+</body>
+</html>
