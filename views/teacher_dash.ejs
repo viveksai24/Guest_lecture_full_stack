@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- navigation bars -->
     <link rel = "icon" href = "https://raw.githubusercontent.com/viveksai24/Guest_lecture_full_stack/main/images/logo_glm-removebg-preview.png" type = "image/x-icon"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -63,7 +64,7 @@
 <br>
 <br>
 <div class="container w-75 p-5 justify-content-center">
-    <div class="float-right">
+    <div class="float-right" align="right">
         <button type="button" class="btn btn-secondary  btn-lg" data-bs-toggle="modal" data-bs-target="#kt_modal_scrollable_2">
             Add +
         </button>
@@ -98,6 +99,7 @@
                                                         <form class="mx-1 mx-md-4" action="/added_event" method="post" >
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">title</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
                                                                     <input type="text" name="event" id="form3Example1c" class="form-control" />
                                                                     <label class="form-label" for="form3Example1c">Event Name</label>
@@ -106,15 +108,17 @@
     
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">description</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <textarea id="form3Example2c" class="form-control" rows="1"></textarea>
-                                                                    <input type="text" id="form3Example1c" name="eDescription" class="form-control" />
+                                                                    <textarea id="form3Example2c" class="form-control" name="eDescription" rows="1"></textarea>
+                                                                    <!-- <input type="text" id="form3Example1c"  class="form-control" /> -->
                                                                     <label class="form-label" for="form3Example2c">Description</label>
                                                                 </div>
                                                             </div>
                     
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">person</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
                                                                     <input type="text" id="form3Example3c" name="gName" class="form-control" />
                                                                     <label class="form-label" for="form3Example3c">Guest Name</label>
@@ -123,6 +127,7 @@
                     
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">mail</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
                                                                     <input type="email" id="form3Example4c" name="gMail" class="form-control" />
                                                                     <label class="form-label" for="form3Example4c">Guest Email</label>
@@ -131,13 +136,16 @@
     
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">call</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
                                                                     <input type="tel" id="form3Example5c" name="gPhone" class="form-control" />
                                                                     <label class="form-label" for="form3Example5c">Guest Phone</label>
                                                                 </div>
                                                             </div>
     
-                                                            <div class="d-flex flex-row align-items-center mb-4">                                                            
+                                                            <div class="d-flex flex-row align-items-center mb-4"> 
+                                                                <span class="material-symbols-outlined">groups</span>  
+                                                                &nbsp;&nbsp;                                                     
                                                                 <div class="form-check form-check-inline">
                                                                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
                                                                     <label class="form-check-label" for="inlineRadio1">Online</label>
@@ -150,6 +158,7 @@
     
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">location_on</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
                                                                     <input type="" id="form3Example6c" name="platform" class="form-control" />
                                                                     <label class="form-label" for="form3Example6c">Platform</label>
@@ -159,6 +168,7 @@
     
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">event</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
                                                                     <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control">
                                                                     <!-- <label class="form-label" for="form3Example7c">Date</label> -->
@@ -166,13 +176,14 @@
                                                             </div>
 
                                                             <div class="d-flex flex-row align-items-center mb-4">
-                                                                <span class="material-symbols-outlined">arrow_drop_down</span>
+                                                                <span class="material-symbols-outlined">school</span>
+                                                                &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">     
                                                                     <!-- <input type="" id="form3Example6c" class="form-control" />                                                            -->
-                                                                    <label class="form-label" for="form3Example8c">Select Department</label>
-                                                                    <br>
+                                                                    <!-- <label class="form-label" for="form3Example8c">Select Department</label> -->
+                                                                    <!-- <br> -->
                                                                     <select id="form3Example8c" class="form-control selectpicker" name="department" multiple data-live-search="true">
-                                                                        <!-- <option selected hidden disabled>Select Department</option> -->
+                                                                        <option hidden disabled>Select Department</option>
                                                                         <option value="cse">Computer Science and Engineering</option>
                                                                         <option value="me">Mechanical Engineering</option>
                                                                         <option value="ece">Electronics and Communication Engineering</option>
@@ -209,34 +220,25 @@
     <div style="border-bottom: 10px;">
         <h2>Events</h2>
     </div>  
-    <hr>   
+    <hr>  
+    
     <div class="card">
         <h1 class="card-title"><h3 class="card-header">Ongoing Events</h3></h1>
+        <% for(var i=0;i<eventdeatils.length; i++){ %>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
+                <div class="card-body">                    
+                    <h5 class="card-title"><%= eventdeatils[i] %></h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#" class="btn btn-primary">Join</a>
                 </div>
             </li>
         </ul>
+        <hr>
+        <% } %>
     </div>
     <hr>
+    
     <div class="card">
         <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
         <ul class="list-group list-group-flush">
@@ -244,21 +246,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Special title treatment</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#" class="btn btn-primary">Join</a>
                 </div>
             </li>
         </ul>
@@ -271,21 +259,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Special title treatment</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="#" class="btn btn-primary">Join</a>
                 </div>
             </li>
         </ul>

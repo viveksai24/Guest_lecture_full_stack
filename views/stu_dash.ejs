@@ -41,150 +41,48 @@
 
 <%- include('header',{username:username}); -%>
 
-  <div id="page-container" class="snipcss-7flpI">
-    <noscript>
-        <div id="noscript">
-            This site works best with JavaScript enabled.
-        </div>
-    </noscript>
-    <br>
-    <main id="content"
-        class="tether-target-attached-top tether-element-attached-top tether-element-attached-center tether-target-attached-center">
-        <div class="page-title">
-            <div class="tabs">
-                <h2>
-                    Events
-                </h2>
-                <span class="spacer">
+<br>
+<div style="border-bottom: 10px;">
+    <h2>Events</h2>
+</div>  
+<hr>   
+<div class="card">
+    <h1 class="card-title"><h3 class="card-header">Ongoing Events</h3></h1>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="card-body">
+                <h5 class="card-title"><%= event%></h5>
+                <p class="card-text"><%= eDescription%></p>
+                <a href="#" class="btn btn-primary">join</a>
             </div>
-        </div>
-        <div id="content-body">
-            <div class="content-description">
-                <h4>
-                    Ongoing Events
-                </h4>
-                <table class="contest-list table striped">
-                    <thead>
-                        <tr>
-                            <th class="snipcss0-0-0-1 tether-target-attached-top tether-element-attached-top tether-element-attached-center tether-target-attached-center style-EEfqb"
-                                id="style-EEfqb">
-                                Events
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="contest-block">
-                                    <a href="/contest/eval1csea" class="contest-list-title">
-                                        Software Engineering
-                                    </a>
-                                    <span class="contest-tags">
-                                    </span>
-                                    <br>
-                                    <span class="time">
-                                        Starting in
-                                        <span data-secs="44419.879971" class="time-remaining">
-                                            12:12:43
-                                        </span>
-                                        .
-                                    </span>
-                                    <div class="time time-left">
-                                        May 10, 2023, 11:30
-                                        <br>
-                                        02:00 long
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <h4>
-                    Upcoming Events
-                </h4>
-                <table class="contest-list table striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                Events
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="contest-block">
-                                    <a href="/contest/eval1csea" class="contest-list-title">
-                                        Data Structures and Algorithms
-                                    </a>
-                                    <span class="contest-tags">
-                                    </span>
-                                    <br>
-                                    <span class="time">
-                                        Starting in
-                                        <span data-secs="44419.879971" class="time-remaining">
-                                            12:12:43
-                                        </span>
-                                        .
-                                    </span>
-                                    <div class="time time-left">
-                                        May 10, 2023, 11:30
-                                        <br>
-                                        02:00 long
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <br>
-                <h4>
-                    Past Events
-                </h4>
-                <table class="contest-list table striped">
-                    <thead>
-                        <tr>
-                            <th id="style-bby3d" class="style-bby3d">
-                                Events
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="contest-block">
-                                    <a href="/contest/eval1csea" class="contest-list-title">
-                                        Web 3
-                                    </a>
-                                    <span class="contest-tags">
-                                    </span>
-                                    <br>
-                                    <span class="time">
-                                        Starting in
-                                        <span data-secs="44419.879971" class="time-remaining">
-                                            12:12:43
-                                        </span>
-                                        .
-                                    </span>
-                                    <div class="time time-left">
-                                        May 10, 2023, 11:30
-                                        <br>
-                                        02:00 long
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        </li>
+    </ul>
+</div>
+<hr>
+<div class="card">
+    <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
-        </div>
-    </main>
-    <br>
-    <br>
+        </li>
+    </ul>
+</div>
+<hr>
+<div class="card">
+    <h5 class="card-title"><h3 class="card-header">Past Events</h3></h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </li>
+    </ul>
 </div>
 
   <%- include('footer'); -%>
