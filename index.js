@@ -28,7 +28,7 @@ app.post('/stuDash',function(req,res){
 
 app.get('/teacher_dash',function(req,res){
     console.log(sessionstoragelist);
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist});
+    res.render('teacher_dash_alert',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist});
 });
 
 app.get('/about',function(req,res){
