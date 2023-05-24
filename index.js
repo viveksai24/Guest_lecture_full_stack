@@ -17,13 +17,13 @@ let year = date_time.getFullYear();
 
 // going to student dash from about us page
 app.get('/stuDash',function(req,res){
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    res.render('teacher_dash_alert',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
 });
 
 app.post('/stuDash',function(req,res){
     console.log(req.body);
     sessionstorage.setItem('username',req.body.username);
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    res.render('teacher_dash_alert',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
 });
 
 app.get('/teacher_dash',function(req,res){
