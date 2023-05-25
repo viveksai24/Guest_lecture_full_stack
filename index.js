@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
 
 var sessionstorage = require('sessionstorage');
-var sessionstoragelist = ["AI","Computer networks"];
+var sessionstoragelist = [];
 
 // current date and time
 let date_time = new Date();
@@ -44,7 +44,7 @@ app.post('/Dashboard',function(req,res){
         }
 		else if(result[0]['role']=='teacher'){
             req.body.username=req.body.username.split("@")[0];
-			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist, isAdded: false});
 		}
         else if (result[0]['role']=='student'){
             res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
@@ -54,28 +54,53 @@ app.post('/Dashboard',function(req,res){
 
 app.get('/teacher_dash',function(req,res){
     console.log(sessionstoragelist);
-    res.render('teacher_dash_alert',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist});
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: false});
+});
+
+app.get('/teacher_dash1',function(req,res){
+    console.log(sessionstoragelist);
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: true});
 });
 
 app.get('/about',function(req,res){
     console.log(req.url);
-    res.render('about',{username: sessionstorage.getItem('username')});
+    res.render('about',{username: sessionstorage.getItem('username'), isLogged: true});
 });
 
+//logged out version of about us page
+app.get('/about1',function(req,res){
+    console.log(req.url);
+    res.render('about',{username: sessionstorage.getItem('username'), isLogged: false});
+});
+
+//for alert and submitted form data in event creation
 app.post('/added_event',function(req,res){
     console.log(req.body);
     // var cuurent_data = today.tolocaleDateString("en-US   ",options);
-    sessionstoragelist.push(req.body.event);
-    res.redirect('/teacher_dash');  
+    sessionstoragelist.push(req.body);
+    res.redirect('/teacher_dash1');  
 });
 
 app.get('/',function(req,res){
-    res.render('login');
+    res.render('login',{isAlert: false});
 });
 
+app.get('/home',function(req,res){
+    pool.query('SELECT * FROM newlogin where username=?',[sessionstorage.getItem('username')],(err,result,feilds)=>{
+		if(err){
+			console.log(err);
+		}
+        else if (result[0]['role']=='teacher'){
+            res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: false});
+        }
+        else{
+            res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+        }
+	})
+});
 //opening the login_alert page
 app.get('/login_alert',function(req,res){
-    res.render('login_alert');
+    res.render('login',{isAlert: true});
 });
 
 app.listen(3000, function(){
