@@ -26,7 +26,7 @@ let year = date_time.getFullYear();
 
 // going to student dash from about us page
 app.get('/stuDash',function(req,res){
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    res.render('/stu_dash',{username: sessionstorage.getItem('username')});
 });
 
 //from login page
@@ -35,7 +35,21 @@ app.post('/Dashboard',function(req,res){
     req.body.username = req.body.username.toLowerCase();
     console.log(req.body.username);
     sessionstorage.setItem('username',req.body.username);
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    pool.query('SELECT * FROM newlogin where username=? and password=?',[req.body.username,req.body.password],(err,result,feilds)=>{
+		if(err){
+			console.log(err);
+		}
+        else if (result.length==0){
+            res.redirect('/login_alert');
+        }
+		else if(result[0]['role']=='teacher'){
+            req.body.username=req.body.username.split("@")[0];
+			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+		}
+        else if (result[0]['role']=='student'){
+            res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+        }
+	})
 });
 
 app.get('/teacher_dash',function(req,res){
