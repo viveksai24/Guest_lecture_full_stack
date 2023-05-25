@@ -92,9 +92,8 @@
                         <h5 class="card-title" data-mdb-toggle="modal" href="#exampleModalToggle1"><%= eventdeatils[i] %></h5>
                         <!-- <a class="btn btn-primary" data-mdb-toggle="modal" href="#exampleModalToggle1" role="button">Open first modal</a> -->
                         <!-- First modal dialog -->
-                        <div class="modal fade" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1"
-                            tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                        <div class="modal fade modal-dialog-scrollable" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Event Details</h5>
@@ -139,8 +138,72 @@
                                             </div>
                                         </div>
                                         <hr>
+                                        <!-- guest mail  -->
+                                        <div class="row">
+                                            <div class="col-sm-3 pr-3">
+                                                <h5 class="modal-title">Guest Email</h5>
+                                            </div>
+                                            <div class="col-sm-9 d-flex justify-content-start">
+                                                <p>Michael_Bronstein@gmail.com</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- Guest phone Number -->
+                                        <div class="row">
+                                            <div class="col-sm-3 pr-3">
+                                                <h5 class="modal-title">Guest Phone Number</h5>
+                                            </div>
+                                            <div class="col-sm-9 d-flex justify-content-start">
+                                                <p>+91 9234534567</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- Mode -->
+                                        <div class="row">
+                                            <div class="col-sm-3 pr-3">
+                                                <h5 class="modal-title">Mode</h5>
+                                            </div>
+                                            <div class="col-sm-9 d-flex justify-content-start">
+                                                <p>Online</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- platform -->
+                                        <div class="row">
+                                            <div class="col-sm-3 pr-3">
+                                                <h5 class="modal-title">Platform</h5>
+                                            </div>
+                                            <div class="col-sm-9 d-flex justify-content-start">
+                                                <p>Microsoft Teams</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- Date -->
+                                        <div class="row">
+                                            <div class="col-sm-3 pr-3">
+                                                <h5 class="modal-title">Date</h5>
+                                            </div>
+                                            <div class="col-sm-9 d-flex justify-content-start">
+                                                <p>26/05/2023 - 2:30 PM to 26/05/2023 - 4:30 PM</p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!-- Department -->
+                                        <div class="row">
+                                            <div class="col-sm-3 pr-3">
+                                                <h5 class="modal-title">Department</h5>
+                                            </div>
+                                            <div class="col-sm-9 d-flex justify-content-start">
+                                                <p>Computer Science, Electrical</p>
+                                            </div>
+                                        </div>
+                                        <!-- <hr> -->
                                     </div>
                                     <div class="modal-footer">
+                                        <button class="btn btn-primary" data-mdb-target="#exampleModalToggle33" data-mdb-toggle="modal"
+                                            data-mdb-dismiss="modal">
+                                            feedback
+                                        </button>
                                         <button class="btn btn-primary" data-mdb-target="#exampleModalToggle22" data-mdb-toggle="modal"
                                             data-mdb-dismiss="modal">
                                             Join
@@ -214,6 +277,84 @@
                                             </div>
                                         </section>
                                     </div>
+                                    <!-- <div class="modal-footer">
+                                        <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
+                                            Back Event Details
+                                        </button>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="exampleModalToggle33" aria-hidden="true" aria-labelledby="exampleModalToggleLabel33"
+                            tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <!-- content -->
+                                    <div class="card">
+                                        <div class="card-header bg-primary">
+                                          <h5 class="card-title text-white mt-2" id="exampleModalLabel">Feedback request</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="text-center">
+                                            <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
+                                            <p>
+                                              <strong>Your opinion matters</strong>
+                                            </p>
+                                            <p>
+                                              Have some ideas how to improve our product?
+                                              <strong>Give us your feedback.</strong>
+                                            </p>
+                                          </div>
+                                    
+                                          <hr />
+                                    
+                                          <form class="px-4" action="">
+                                            <p class="text-center"><strong>Your rating:</strong></p>
+                                    
+                                            <div class="form-check mb-2">
+                                              <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example1" />
+                                              <label class="form-check-label" for="radio3Example1">
+                                                Very good
+                                              </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                              <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example2" />
+                                              <label class="form-check-label" for="radio3Example2">
+                                                Good
+                                              </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                              <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example3" />
+                                              <label class="form-check-label" for="radio3Example3">
+                                                Medicore
+                                              </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                              <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example4" />
+                                              <label class="form-check-label" for="radio3Example4">
+                                                Bad
+                                              </label>
+                                            </div>
+                                            <div class="form-check mb-2">
+                                              <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example5" />
+                                              <label class="form-check-label" for="radio3Example5">
+                                                Very bad
+                                              </label>
+                                            </div>
+                                    
+                                            <p class="text-center"><strong>What could we improve?</strong></p>
+                                    
+                                            <!-- Message input -->
+                                            <div class="form-outline mb-4">
+                                              <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                                              <label class="form-label" for="form4Example3">Your feedback</label>
+                                            </div>
+                                          </form>
+                                        </div>
+                                        <div class="card-footer text-end">
+                                          <button type="button" class="btn btn-primary">Submit</button>
+                                        </div>
+                                      </div>
                                     <!-- <div class="modal-footer">
                                         <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
                                             Back Event Details
