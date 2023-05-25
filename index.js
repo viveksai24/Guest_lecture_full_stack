@@ -1,6 +1,15 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const {createPool}=require('mysql');
+const pool = createPool({
+		host: 'localhost',
+		user: 'root',
+		password: '',
+		database: 'details',
+		connectionLimit: 10
+	});
+
 
 app.use(bodyParser.urlencoded({extendend: true}));
 app.set('view engine', 'ejs');
@@ -17,13 +26,16 @@ let year = date_time.getFullYear();
 
 // going to student dash from about us page
 app.get('/stuDash',function(req,res){
-    res.render('teacher_dash_alert',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
 });
 
-app.post('/stuDash',function(req,res){
+//from login page
+app.post('/Dashboard',function(req,res){
     console.log(req.body);
+    req.body.username = req.body.username.toLowerCase();
+    console.log(req.body.username);
     sessionstorage.setItem('username',req.body.username);
-    res.render('teacher_dash_alert',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
 });
 
 app.get('/teacher_dash',function(req,res){
@@ -45,6 +57,11 @@ app.post('/added_event',function(req,res){
 
 app.get('/',function(req,res){
     res.render('login');
+});
+
+//opening the login_alert page
+app.get('/login_alert',function(req,res){
+    res.render('login_alert');
 });
 
 app.listen(3000, function(){
