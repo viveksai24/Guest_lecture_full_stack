@@ -3,12 +3,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const {createPool}=require('mysql');
 const pool = createPool({
-		host: 'localhost',
-		user: 'root',
-		password: '',
-		database: 'details',
-		connectionLimit: 10
-	});
+    host: 'localhost',
+    // port: '3306',
+    user: 'root',
+    password: '',
+    database: 'details',
+    connectionLimit: 10
+});
 
 
 app.use(bodyParser.urlencoded({extendend: true}));
@@ -35,21 +36,23 @@ app.post('/Dashboard',function(req,res){
     req.body.username = req.body.username.toLowerCase();
     console.log(req.body.username);
     sessionstorage.setItem('username',req.body.username);
-    pool.query('SELECT * FROM newlogin where username=? and password=?',[req.body.username,req.body.password],(err,result,feilds)=>{
-		if(err){
-			console.log(err);
-		}
-        else if (result.length==0){
-            res.redirect('/login_alert');
-        }
-		else if(result[0]['role']=='teacher'){
-            req.body.username=req.body.username.split("@")[0];
-			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
-		}
-        else if (result[0]['role']=='student'){
-            res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
-        }
-	})
+    // res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});  
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    // pool.query('SELECT * FROM newlogin where username=? and password=?',[req.body.username,req.body.password],(err,result,feilds)=>{
+	// 	if(err){
+	// 		console.log(err);
+	// 	}
+    //     else if (result.length==0){
+    //         res.redirect('/login_alert');
+    //     }
+	// 	else if(result[0]['role']=='teacher'){
+    //         req.body.username=req.body.username.split("@")[0];
+	// 		res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+	// 	}
+    //     else if (result[0]['role']=='student'){
+    //         res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+    //     }
+	// })
 });
 
 app.get('/teacher_dash',function(req,res){
