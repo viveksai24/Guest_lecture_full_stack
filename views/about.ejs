@@ -60,8 +60,9 @@
     </style>
      <title>About Us</title>
   </head>
-
-<%- include('header',{username:username}); -%>
+  <% if (isLogged) { %>
+    <%- include('header',{username:username}); -%>
+  <% } %>
 
 <div class="bg-light">
     <div class="container py-5">
