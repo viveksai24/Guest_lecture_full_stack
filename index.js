@@ -45,7 +45,9 @@ app.post('/Dashboard',function(req,res){
         }
 		else if(result[0]['role']=='teacher'){
             req.body.username=req.body.username.split("@")[0];
-			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist, isAdded: false});
+            const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+            console.log(now);
+			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist, isAdded: false,currentdate:now});
 		}
         else if (result[0]['role']=='student'){
             res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
@@ -55,11 +57,13 @@ app.post('/Dashboard',function(req,res){
 
 app.get('/teacher_dash',function(req,res){
     console.log(sessionstoragelist);
+    
     res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: false});
 });
 
 app.get('/teacher_dash1',function(req,res){
     console.log(sessionstoragelist);
+    
     res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: true});
 });
 
@@ -78,6 +82,9 @@ app.get('/about1',function(req,res){
 app.post('/added_event',function(req,res){
     console.log(req.body);
     // var cuurent_data = today.tolocaleDateString("en-US   ",options);
+    
+    // const startDateTime = new Date(req.body.dateTime[0]);
+    // const endDateTime = new Date(req.body.dateTime[1]);     
     sessionstoragelist.push(req.body);
     res.redirect('/teacher_dash1');  
 });

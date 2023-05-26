@@ -85,15 +85,16 @@
     <hr>
     <div class="card">
         <h1 class="card-title"><h3 class="card-header">Ongoing Events</h3></h1>
-        <% for(var i=0;i<eventdeatils.length; i++){ %>
+        <% for(var i=0; i<eventdeatils.length; i++){ %>
+            
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="card-body">                        
-                        <h5 class="card-title" data-mdb-toggle="modal" href="#exampleModalToggle1"><%= eventdeatils[i] %></h5>
+                        <h5 class="card-title" data-mdb-toggle="modal" href="#exampleModalToggle<%=i%>"><%= eventdeatils[i].event %></h5>
                         <!-- <a class="btn btn-primary" data-mdb-toggle="modal" href="#exampleModalToggle1" role="button">Open first modal</a> -->
                         <!-- First modal dialog -->
-                        <div class="modal fade modal-dialog-scrollable" id="exampleModalToggle1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal fade modal-dialog-scrollable" id="exampleModalToggle<%=i%>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">                                
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Event Details</h5>
@@ -106,7 +107,7 @@
                                                 <h5 class="modal-title">Event</h5>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p><%= eventdeatils[i] %></p>
+                                                <p><%= eventdeatils[i].event %></p>
                                             </div>
                                         </div>
                                         <hr>
@@ -116,15 +117,7 @@
                                             </div>
                                             <div class="col-sm-9">
                                                 <p>
-                                                    Machine learning is a subfield of artificial intelligence (AI) that involves developing 
-                                                    algorithms and statistical models that enable computers to learn from data, without being 
-                                                    explicitly programmed. It is concerned with the development of techniques that allow 
-                                                    computers to automatically improve their performance on a specific task as they are 
-                                                    exposed to more data.
-                                                    Machine learning algorithms are designed to identify patterns in data, 
-                                                    learn from those patterns, and use what they’ve learned to make predictions or 
-                                                    decisions about new data. There are three main types of machine learning: supervised 
-                                                    learning, unsupervised learning, and reinforcement learning.
+                                                    <%= eventdeatils[i].eDescription %>
                                                 </p>
                                             </div>
                                         </div>
@@ -134,7 +127,9 @@
                                                 <h5 class="modal-title">Guest Name</h5>
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-start">
-                                                <p>Michael Bronstein</p>
+                                                <p>
+                                                    <%= eventdeatils[i].gName %>
+                                                </p>
                                             </div>
                                         </div>
                                         <hr>
@@ -144,7 +139,9 @@
                                                 <h5 class="modal-title">Guest Email</h5>
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-start">
-                                                <p>Michael_Bronstein@gmail.com</p>
+                                                <p>
+                                                    <%= eventdeatils[i].gMail %>
+                                                </p>
                                             </div>
                                         </div>
                                         <hr>
@@ -154,7 +151,9 @@
                                                 <h5 class="modal-title">Guest Phone Number</h5>
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-start">
-                                                <p>+91 9234534567</p>
+                                                <p>
+                                                    <%= eventdeatils[i].gPhone %>
+                                                </p>
                                             </div>
                                         </div>
                                         <hr>
@@ -164,7 +163,12 @@
                                                 <h5 class="modal-title">Mode</h5>
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-start">
-                                                <p>Online</p>
+                                                <% var op = eventdeatils[i].inlineRadioOptions %>
+                                                <% if(op == "option1"){ %>
+                                                    <p>Online</p>
+                                                <% }else{ %>
+                                                    <p>Offline</p>  
+                                                <% } %>
                                             </div>
                                         </div>
                                         <hr>
@@ -174,7 +178,9 @@
                                                 <h5 class="modal-title">Platform</h5>
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-start">
-                                                <p>Microsoft Teams</p>
+                                                <p>
+                                                    <%= eventdeatils[i].platform %>
+                                                </p>
                                             </div>
                                         </div>
                                         <hr>
@@ -184,7 +190,11 @@
                                                 <h5 class="modal-title">Date</h5>
                                             </div>
                                             <div class="col-sm-9 d-flex justify-content-start">
-                                                <p>26/05/2023 - 2:30 PM to 26/05/2023 - 4:30 PM</p>
+                                                <p>
+                                                    <% var start = eventdeatils[i].dateTime[0].split("T") %>
+                                                    <% var end = eventdeatils[i].dateTime[1].split("T") %>
+                                                    <%= start[0] %> - <%= start[1] %> to <%= end[0] %> - <%= end[1] %>
+                                                </p>
                                             </div>
                                         </div>
                                         <hr>
@@ -197,28 +207,26 @@
                                                 <p>Computer Science, Electrical</p>
                                             </div>
                                         </div>
-                                        <!-- <hr> -->
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" data-mdb-target="#exampleModalToggle33" data-mdb-toggle="modal"
-                                            data-mdb-dismiss="modal">
-                                            feedback
+                                        <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>3" data-mdb-toggle="modal" data-mdb-dismiss="modal">
+                                            Feedback
                                         </button>
-                                        <button class="btn btn-primary" data-mdb-target="#exampleModalToggle22" data-mdb-toggle="modal"
+                                        <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>2" data-mdb-toggle="modal"
                                             data-mdb-dismiss="modal">
-                                            Join
+                                            Join-Discussion
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Second modal dialog -->
-                        <div class="modal fade" id="exampleModalToggle22" aria-hidden="true" aria-labelledby="exampleModalToggleLabel22"
+                        <div class="modal fade" id="exampleModalToggle<%= i %>2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= i %>2"
                             tabindex="-1">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalToggleLabel22"><%= eventdeatils[i] %></h5>
+                                        <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2"><%= eventdeatils[i].event %></h5>
                                         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -228,50 +236,48 @@
                                                     <div class="col-md-6 col-lg-7 col-xl-8">
                                                         <ul class="list-unstyled">
                                                             <li class="d-flex justify-content-between mb-4">
-                                                                <div class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
-                                                                    <span class="material-symbols-outlined" style="font-size: 45px;">group</span>
-                                                                </div>
-                                                              <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"> -->
-                                                              <div class="card">
-                                                                <div class="card-header d-flex justify-content-between p-3">
-                                                                  <p class="fw-bold mb-0">Brad Pitt</p>
-                                                                  <p class="text-muted small mb-0"><i class="far fa-clock"></i> 12 mins ago</p>
-                                                                </div>
-                                                                <div class="card-body">
-                                                                  <p class="mb-0">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                                    labore et dolore magna aliqua.
-                                                                  </p>
-                                                                </div>
-                                                              </div>
+                                                                <div class="card w-100">
+                                                                    <div class="card-header d-flex justify-content-between p-3">
+                                                                        <p class="fw-bold mb-0">Lara Croft</p>
+                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="mb-0">
+                                                                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                                                            doloremque laudantium.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>                                                        
+                                                                <!-- <span class="material-icons-outlined rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60" style="font-size: 50px;">account_circle</span>                                                     -->
+                                                                
+                                                                <!-- <img src="https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
+                                                                    alt="avatar" class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60"> -->
                                                             </li>
                                                             <li class="d-flex justify-content-between mb-4">
-                                                              <div class="card w-100">
-                                                                <div class="card-header d-flex justify-content-between p-3">
-                                                                  <p class="fw-bold mb-0">Lara Croft</p>
-                                                                  <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
+                                                                <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
+                                                                    alt="avatar" class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                                                    width="60">
+                                                                <div class="card">
+                                                                    <div class="card-header d-flex justify-content-between p-3">
+                                                                        <p class="fw-bold mb-0">Brad Pitt</p>
+                                                                        <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10 mins ago</p>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="mb-0">
+                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                                            incididunt ut labore et dolore magna aliqua.
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="card-body">
-                                                                  <p class="mb-0">
-                                                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                                                    laudantium.
-                                                                  </p>
-                                                                </div>
-                                                              </div>
-                                                              <div class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
-                                                                <span class="material-symbols-outlined" style="font-size: 45px;">person</span>
-                                                              </div>
-                                                              <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp" alt="avatar"> -->
-                                                            </li>                                                            
-                                                            <li class="bg-white mb-3">
-                                                              <div class="form-outline">
-                                                                <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
-                                                                <label class="form-label" for="textAreaExample2">Message</label>
-                                                              </div>
                                                             </li>
-                                                            <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script> -->
+                                                            <li class="bg-white mb-3">
+                                                                <div class="form-outline">
+                                                                    <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
+                                                                    <label class="form-label" for="textAreaExample2">Message</label>
+                                                                </div>
+                                                            </li>
                                                             <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
-                                                          </ul>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </div>
@@ -285,11 +291,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="exampleModalToggle33" aria-hidden="true" aria-labelledby="exampleModalToggleLabel33"
+                        <!-- Updation -->
+                        <div class="modal fade" id="exampleModalToggle<%= i %>3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= i %>3"
                             tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                                 <div class="modal-content">
-                                    <!-- content -->
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2"><%= eventdeatils[i].event %></h5>
+                                        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                    </div>
                                     <div class="card">
                                         <div class="card-header bg-primary">
                                           <h5 class="card-title text-white mt-2" id="exampleModalLabel">Feedback request</h5>
@@ -363,23 +373,33 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="card-text">
+                            <% var start = eventdeatils[i].dateTime[0].split("T") %>
+                            <% var end = eventdeatils[i].dateTime[1].split("T") %>
+                            <%= start[0] %> - <%= start[1] %> to <%= end[0] %> - <%= end[1] %>
+                        </p>
+                        <a href="#" class="btn btn-primary">Computer Science</a>
+                        &nbsp;&nbsp;
+                        <a href="#" class="btn btn-primary">Electrical</a>
+
                     </div>
                 </li>
             </ul>
         <hr>
         <% } %>
-    </div>  
+    </div>
     <hr>
+    
     <div class="card">
         <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Join</a>
+                    <h5 class="card-title">Computer Networks</h5>
+                    <p class="card-text">2023-05-31 - 13:30 to 2023-05-31 - 14:30</p>
+                    <a href="#" class="btn btn-primary">Computer Science</a>
+                        &nbsp;&nbsp;
+                    <a href="#" class="btn btn-primary">Electrical</a>
                 </div>
             </li>
         </ul>
@@ -390,9 +410,11 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Join</a>
+                    <h5 class="card-title">Software Engineering</h5>
+                    <p class="card-text">2023-05-24 - 13:30 to 2023-05-24 - 15:30</p>
+                    <a href="#" class="btn btn-primary">Computer Science</a>
+                        &nbsp;&nbsp;
+                    <a href="#" class="btn btn-primary">Electrical</a>
                 </div>
             </li>
         </ul>
