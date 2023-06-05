@@ -3,11 +3,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const {createPool}=require('mysql');
 const pool = createPool({
-    host: 'localhost',
-    // port: '3306',
-    user: 'root',
-    password: '',
-    database: 'details',
+    host: 'sql12.freesqldatabase.com',
+    port: '3306',
+    user: 'sql12623427',
+    password: 'gc6JWu2GU6',
+    database: 'sql12623427',
     connectionLimit: 10
 });
 
@@ -17,7 +17,8 @@ app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
 
 var sessionstorage = require('sessionstorage');
-var sessionstoragelist = [];
+const { fileLoader } = require('ejs');
+// var sessionstoragelist = [];
 
 // current date and time
 let date_time = new Date();
@@ -36,56 +37,125 @@ app.post('/Dashboard',function(req,res){
     req.body.username = req.body.username.toLowerCase();
     console.log(req.body.username);
     sessionstorage.setItem('username',req.body.username);
-    pool.query('SELECT * FROM newlogin where username=? and password=?',[req.body.username,req.body.password],(err,result,feilds)=>{
+    pool.query('SELECT * FROM Login where Username=? and Password=?',[req.body.username,req.body.password],(err,result,feilds)=>{
 		if(err){
 			console.log(err);
 		}
         else if (result.length==0){
             res.redirect('/login_alert');
         }
-		else if(result[0]['role']=='teacher'){
+		else if(result[0]['Role']=='teacher'){
             req.body.username=req.body.username.split("@")[0];
             const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
-            console.log(now);
-			res.render('teacher_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist, isAdded: false,currentdate:now});
+            var final = [];
+            pool.query('SELECT * FROM Event_Details;',(err,result1,feilds)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    for (var i=0; i<result1.length;i++){
+                        // console.log(i);
+                        var depts = [];
+                        pool.query('SELECT dept FROM event_dep where event_dep.EventID=?;',[result1[i]['EventID']],(err,result2,feilds)=>{
+                            if(err){
+                                console.log(err);
+                            }else{
+                                for (var j=0; j<result2.length;j++){
+                                    depts.push(result2[j]['dept']);
+                                }
+                                // console.log(result1);
+                                // const data = JSON.parse(JSON.stringify(result1));
+                                // const details = JSON.parse(JSON.stringify(result[i]))
+                                // console.log(details)
+                                // data.forEach(result1 => {
+                                //     console.log(result1.dept);
+                                //   });
+                                
+                                console.log(final)
+
+                            }
+                        });
+                        final.push({
+                            EventID: result1[i].EventID,
+                            faculty : result1[i].faculty,
+                            Event_name: result1[i].Event_name,
+                            descp: result1[i].descp,
+                            guestname: result1[i].guestname,
+                            linkedIN: result1[i].linkedIN,
+                            guestmail: result1[i].guestmail,
+                            guestnum: result1[i].guestnum,
+                            mode: result1[i].mode,
+                            platform: result1[i].platform,
+                            sdt: result1[i].sdt,
+                            edt: result1[i].edt,
+                            dept: depts
+                        });
+                    }
+                    // sessionstoragelist = result;
+                    // console.log(final)
+                    sessionstorage.setItem('sessionstoragelist',final);
+                }
+            });
+            sessionstorage.setItem('name',result[0]['Name']);
+            console.log(final);
+			res.render('teacher_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'),eventdeatils:sessionstorage.getItem('sessionstoragelist') , isAdded: false,currentdate:now});
 		}
-        else if (result[0]['role']=='student'){
-            res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+        else if (result[0]['Role']=='student'){
+            sessionstorage.setItem('name',result[0]['Name']);
+            res.render('stu_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'),eventdeatils: sessionstoragelist});
         }
 	})
 });
 
 app.get('/teacher_dash',function(req,res){
-    console.log(sessionstoragelist);
+    // console.log(sessionstoragelist);
     
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: false});
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'), eventdeatils:sessionstorage.getItem('sessionstoragelist'), isAdded: false});
 });
 
 app.get('/teacher_dash1',function(req,res){
-    console.log(sessionstoragelist);
+    // console.log(sessionstoragelist);
     
-    res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: true});
+    res.render('teacher_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'), eventdeatils:sessionstorage.getItem('sessionstoragelist'), isAdded: true});
 });
 
 app.get('/about',function(req,res){
     console.log(req.url);
-    res.render('about',{username: sessionstorage.getItem('username'), isLogged: true});
+    res.render('about',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'), isLogged: true});
 });
 
 //logged out version of about us page
 app.get('/about1',function(req,res){
     console.log(req.url);
-    res.render('about',{username: sessionstorage.getItem('username'), isLogged: false});
+    res.render('about',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'), isLogged: false});
 });
 
 //for alert and submitted form data in event creation
 app.post('/added_event',function(req,res){
-    console.log(req.body);
+    console.log(req.body.department);
+    console.log(sessionstorage.getItem('name'));
+
     // var cuurent_data = today.tolocaleDateString("en-US   ",options);
     
     // const startDateTime = new Date(req.body.dateTime[0]);
-    // const endDateTime = new Date(req.body.dateTime[1]);     
-    sessionstoragelist.push(req.body);
+    // const endDateTime = new Date(req.body.dateTime[1]);    
+	pool.query('INSERT INTO Event_Details SET ?', {faculty: sessionstorage.getItem('name'),Event_name:req.body.event,descp:req.body.eDescription, guestname:req.body.gName,linkedIN:'hello',guestmail:req.body.gMail,guestnum:req.body.gPhone,mode:req.body.inlineRadioOptions,platform:req.body.platform,sdt:req.body.dateTime[0],edt:req.body.dateTime[1]}, (err,result,feilds) => {
+        if(err){
+            console.log(err)
+        }else{
+            console.log(result);
+            var eventid = result.insertId;
+            console.log(eventid);
+            for (var i=0; i<req.body.dept.length;i++){
+                pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
+                    if(err){
+                        console.log(err);
+                    }
+                });
+            }
+        }
+    });
+
+    // sessionstoragelist.push(req.body);
     res.redirect('/teacher_dash1');  
 });
 
@@ -94,15 +164,15 @@ app.get('/',function(req,res){
 });
 
 app.get('/home',function(req,res){
-    pool.query('SELECT * FROM newlogin where username=?',[sessionstorage.getItem('username')],(err,result,feilds)=>{
+    pool.query('SELECT * FROM Login where Username=?',[sessionstorage.getItem('username')],(err,result,feilds)=>{
 		if(err){
 			console.log(err);
 		}
         else if (result[0]['role']=='teacher'){
-            res.render('teacher_dash',{username: sessionstorage.getItem('username'), eventdeatils: sessionstoragelist, isAdded: false});
+            res.render('teacher_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'), eventdeatils: sessionstoragelist, isAdded: false});
         }
         else{
-            res.render('stu_dash',{username: sessionstorage.getItem('username'),eventdeatils: sessionstoragelist});
+            res.render('stu_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'),eventdeatils: sessionstoragelist});
         }
 	})
 });
