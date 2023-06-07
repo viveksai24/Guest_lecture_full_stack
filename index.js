@@ -82,10 +82,10 @@ app.get('/Dashboard', async (req,res) => {
     });
     while(boo) await sleep(10);
     if(role == 'teacher'){   
-        res.render('teacher_dash',{username: username, name: name, eventdetails: final, isAdded: false,currentdate:now});
+        res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now});
     }
     else if (role == 'student'){
-        res.render('stu_dash',{username: username, name: name, eventdetails: final ,currentdate:now});
+        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now});
     }
 });
 
@@ -154,7 +154,7 @@ app.get('/teacher_dash',async(req,res)=>{
         boo = false;
     });
     while(boo) await sleep(10);
-    res.render('teacher_dash',{username:username,name:name, eventdetails:final, isAdded: false});
+    res.render('teacher_dash',{username:username,name:name,role:role, eventdetails:final, isAdded: false});
 });
 
 app.get('/teacher_dash1',async(req,res)=>{
@@ -205,7 +205,7 @@ app.get('/teacher_dash1',async(req,res)=>{
     });
     while(boo) await sleep(10);
     
-    res.render('teacher_dash',{username:username,name:name, eventdetails:final, isAdded: true});
+    res.render('teacher_dash',{username:username,name:name,role:role, eventdetails:final, isAdded: true});
 });
 
 app.get('/about',function(req,res){
@@ -245,6 +245,10 @@ app.post('/added_event',function(req,res){
 
     // sessionstoragelist.push(req.body);
     res.redirect('/teacher_dash1');  
+});
+
+app.post('/register',function(req,res){
+    console.log('register page');
 });
 
 app.get('/',function(req,res){
