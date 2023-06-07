@@ -74,6 +74,8 @@
   </head>
 
 <%- include('header',{name:name}); -%>
+
+
 <br>
 <br>
 <div class="container w-75 p-5 justify-content-center">
@@ -223,13 +225,13 @@
                                                                     <select id="form3Example8c" class="form-control selectpicker" name="department" multiple data-live-search="true">
                                                                         <option selected disabled>Select Department</option>
                                                                         <option value="cse">Computer Science and Engineering</option>
-                                                                        <option value="me">Mechanical Engineering</option>
+                                                                        <option value="mee">Mechanical Engineering</option>
                                                                         <option value="ece">Electronics and Communication Engineering</option>
                                                                         <option value="eee">Electrical and Electronics Engineering</option>
-                                                                        <option value="ce">Civil Engineering</option>
+                                                                        <option value="cie">Civil Engineering</option>
                                                                         <option value="che">Chemical Engineering</option>
-                                                                        <option value="ae">Aerospace Engineering</option>
-                                                                        <option value="ai">Computer Science and Engineering (Artificial Intelligence)</option>
+                                                                        <option value="aee">Aerospace Engineering</option>
+                                                                        <option value="aie">Computer Science and Engineering (Artificial Intelligence)</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -260,10 +262,11 @@
             <div class="d-flex flex-column mb-3">
                 <div class="p-2 justify-content-center text-center">    <span class="material-symbols-outlined justify-content-center" style="font-size: 75px;">
                     check_circle
-                </span></div>
-              </div>
-              <div class="text-center">
-                    <strong>Success!</strong> Event created successfully!
+                </span>
+            </div>
+            </div>
+            <div class="text-center">
+                <strong>Success!</strong> Event created successfully!
             </div>
         </div>
     
@@ -291,19 +294,37 @@
     <% var newPast = true;%>
     <% var newOngoing = true;%>
     <%var newUpcoming =true;%>
-    
-    <!-- .toLocaleString("en-US", {timeZone: "Asia/Kolkata"}) -->
-    <% for(var i=0; i<eventdeatils.length; i++){ %>
+    <!-- vivek -->
+    <% var ongoing_events = []%>
+    <% var upcoming_events = []%>
+    <% var past_events = []%>
+    <% for(var i=0; i<eventdetails.length; i++){ %>
         <% var now = new Date() %>
-        <% console.log(now) %>
-        <% var start = new Date(eventdeatils[i].sdt)%>
-        <% var end = new Date(eventdeatils[i].edt)%>
-        <% console.log(now.getTime()) %>
-        <% console.log(start) %>
-        <% console.log(end) %>
+        <% var start = new Date(eventdetails[i].sdt)%>
+        <% var end = new Date(eventdetails[i].edt)%>
         <% if (now.getTime() < start.getTime()) { %>
-            <% console.log("upcoming") %>
+            <% upcoming_events.push(eventdetails[i]) %>
         <% } %>
+        <% if (now.getTime()>= start.getTime() && now.getTime() <= end.getTime()) { %>
+            <% ongoing_events.push(eventdetails[i]) %>
+        <% } %>
+        <% if (now.getTime() > end.getTime()) { %>
+            <% past_events.push(eventdetails[i]) %>
+        <% } %>
+    <% } %>
+    <!-- sort the ongoing, upcoming, past events based on dates -->
+    <% ongoing_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
+    <% upcoming_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
+    <% past_events.sort(function(a,b){return new Date(b.sdt) - new Date(a.sdt)}) %>
+    <% console.log(ongoing_events) %>
+    <% console.log(upcoming_events) %>
+    <% console.log(past_events) %>
+    <!-- vivek  -->
+    <!-- .toLocaleString("en-GB", {timeZone: "Asia/Kolkata"}) -->
+    <% for(var i=0; i<ongoing_events.length; i++){ %>
+        <% var now = new Date() %>
+        <% var start = new Date(ongoing_events[i].sdt)%>
+        <% var end = new Date(ongoing_events[i].edt)%>
         <% if (now.getTime()>= start.getTime() && now.getTime() <= end.getTime()) { %>
             <div class="card">
                 <% if (newOngoing) { %>
@@ -311,482 +332,60 @@
                 <% newOngoing=false } %>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <div class="card-body">                        
-                                <h5 class="card-title" data-mdb-toggle="modal" href="#exampleModalToggle<%=i%>"><%= eventdeatils[i].Event_name %></h5>
-                                <!-- <a class="btn btn-primary" data-mdb-toggle="modal" href="#exampleModalToggle1" role="button">Open first modal</a> -->
-                                <!-- First modal dialog -->
-                                <div class="modal fade modal-dialog-scrollable" id="exampleModalToggle<%=i%>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered modal-xl">                                
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Event Details</h5>
-                                                <span class="material-symbols-outlined" data-bs-dismiss="modal">close</span>
-                                            </div>
-                                            <br>
-                                            <div class="row_header mx-auto" style="width: 1000px;">
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Event</h5>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <p><%= eventdeatils[i].Event_name %></p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Event Description</h5>
-                                                    </div>
-                                                    <div class="col-sm-9">
-                                                        <p>
-                                                            <%= eventdeatils[i].descp %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Guest Name</h5>
-                                                    </div>
-                                                    <div class="col-sm-9 d-flex justify-content-start">
-                                                        <p>
-                                                            <%= eventdeatils[i].guestname %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <!-- guest mail  -->
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Guest Email</h5>
-                                                    </div>
-                                                    <div class="col-sm-9 d-flex justify-content-start">
-                                                        <p>
-                                                            <%= eventdeatils[i].guestmail %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <!-- Guest phone Number -->
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Guest Phone Number</h5>
-                                                    </div>
-                                                    <div class="col-sm-9 d-flex justify-content-start">
-                                                        <p>
-                                                            <%= eventdeatils[i].guesntnum %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <!-- Mode -->
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Mode</h5>
-                                                    </div>
-                                                        <p>
-                                                        <%eventdeatils[i].mode %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <!-- platform -->
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Platform</h5>
-                                                    </div>
-                                                    <div class="col-sm-9 d-flex justify-content-start">
-                                                        <p>
-                                                            <%= eventdeatils[i].platform %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <!-- Date -->
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Date</h5>
-                                                    </div>
-                                                    <div class="col-sm-9 d-flex justify-content-start">
-                                                        <p>
-                                                            <% var start = eventdeatils[i].sdt.split("T") %>
-                                                            <% var end = eventdeatils[i].edt.split("T") %>
-                                                            <%= start[0] %> - <%= start[1] %> to <%= end[0] %> - <%= end[1] %>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <!-- Department -->
-                                                <div class="row">
-                                                    <div class="col-sm-3 pr-3">
-                                                        <h5 class="modal-title">Department</h5>
-                                                    </div>
-                                                    <div class="col-sm-9 d-flex justify-content-start">
-                                                        <p>Computer Science, Electrical, Mechanical</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>3" data-mdb-toggle="modal" data-mdb-dismiss="modal">
-                                                    Update
-                                                </button>
-                                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>2" data-mdb-toggle="modal"
-                                                    data-mdb-dismiss="modal">
-                                                    Join-Discussion
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Second modal dialog -->
-                                <div class="modal fade" id="exampleModalToggle<%= i %>2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= i %>2"
-                                    tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2"><%= eventdeatils[i].event %></h5>
-                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <section style="background-color: white;" class="">
-                                                    <div class="container py-5">
-                                                        <div class="row d-flex justify-content-center">
-                                                            <div class="col-md-6 col-lg-7 col-xl-8">
-                                                                <ul class="list-unstyled">
-                                                                    <li class="d-flex justify-content-between mb-4">
-                                                                        <div class="card w-100">
-                                                                            <div class="card-header d-flex justify-content-between p-3">
-                                                                                <p class="fw-bold mb-0">Lara Croft</p>
-                                                                                <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <p class="mb-0">
-                                                                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                                                                    doloremque laudantium.
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>                                                        
-                                                                        <!-- <span class="material-icons-outlined rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60" style="font-size: 50px;">account_circle</span>                                                     -->
-                                                                        
-                                                                        <!-- <img src="https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
-                                                                            alt="avatar" class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60"> -->
-                                                                    </li>
-                                                                    <li class="d-flex justify-content-between mb-4">
-                                                                        <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
-                                                                            alt="avatar" class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                                                                            width="60">
-                                                                        <div class="card">
-                                                                            <div class="card-header d-flex justify-content-between p-3">
-                                                                                <p class="fw-bold mb-0">Brad Pitt</p>
-                                                                                <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10 mins ago</p>
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                <p class="mb-0">
-                                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                                                                    incididunt ut labore et dolore magna aliqua.
-                                                                                </p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="bg-white mb-3">
-                                                                        <div class="form-outline">
-                                                                            <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
-                                                                            <label class="form-label" for="textAreaExample2">Message</label>
-                                                                        </div>
-                                                                    </li>
-                                                                    <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </section>
-                                            </div>
-                                            <!-- <div class="modal-footer">
-                                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
-                                                    Back Event Details
-                                                </button>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Updation -->
-                                <div class="modal fade" id="exampleModalToggle<%= i %>3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= i %>3"
-                                    tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2"><%= eventdeatils[i].event %></h5>
-                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <section class="vh-100">
-                                                    <div class="container h-100">
-                                                        <div class="row d-flex justify-content-center align-items-center h-100">
-                                                            <div class="col-lg-12 col-xl-11">
-                                                                <div class="card text-black" style="border-radius: 25px;">
-                                                                    <div class="card-body p-md-5">
-                                                                        <div class="row justify-content-center">
-                                                                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                                            
-                                                                                <!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Event</p>
-                                                                                <div class="btn" data-bs-dismiss="modal">
-                                                                                    <i class="material-icons">highlight_off</i>
-                                                                                </div> -->
-                                            
-                                                                                <form class="mx-1 mx-md-4" action="/added_event" method="post" >
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">title</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="text" name="event" id="form3Example1c" class="form-control" />
-                                                                                            <label class="form-label" for="form3Example1c">Event Name</label>
-                                                                                        </div>
-                                                                                    </div>
+                            <%- include('event_details',{eventdetails:ongoing_events[i],i:i}) %>
                             
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">description</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <textarea id="form3Example2c" class="form-control" name="eDescription" rows="1"></textarea>
-                                                                                            <!-- <input type="text" id="form3Example1c"  class="form-control" /> -->
-                                                                                            <label class="form-label" for="form3Example2c">Description</label>
-                                                                                        </div>
-                                                                                    </div>
-                                            
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">person</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="text" id="form3Example3c" name="gName" class="form-control" />
-                                                                                            <label class="form-label" for="form3Example3c">Guest Name</label>
-                                                                                        </div>
-                                                                                    </div>
-                                            
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">mail</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="email" id="form3Example4c" name="gMail" class="form-control" />
-                                                                                            <label class="form-label" for="form3Example4c">Guest Email</label>
-                                                                                        </div>
-                                                                                    </div>
-                            
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">call</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="tel" id="form3Example5c" name="gPhone" class="form-control" />
-                                                                                            <label class="form-label" for="form3Example5c">Guest Phone</label>
-                                                                                        </div>
-                                                                                    </div>
-                            
-                                                                                    <div class="d-flex flex-row align-items-center mb-4"> 
-                                                                                        <span class="material-symbols-outlined">groups</span>  
-                                                                                        &nbsp;&nbsp;                                                     
-                                                                                        <div class="form-check form-check-inline">
-                                                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                                                                            <label class="form-check-label" for="inlineRadio1">Online</label>
-                                                                                        </div>                                                            
-                                                                                        <div class="form-check form-check-inline">
-                                                                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-                                                                                            <label class="form-check-label" for="inlineRadio2">Offline</label>
-                                                                                        </div>
-                                                                                    </div>
-                            
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">location_on</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="" id="form3Example6c" name="platform" class="form-control" />
-                                                                                            <label class="form-label" for="form3Example6c">Platform</label>
-                                                                                        </div>
-                                                                                    </div>  
-                            
-                            
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">today</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control">
-                                                                                            <!-- <label class="form-label" for="form3Example7c">Date</label> -->
-                                                                                        </div>                                                            
-                                                                                    </div>
-                        
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">event</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="datetime-local" name="dateTime" id="form3Example7c" value="Date" class="form-control">
-                                                                                            <!-- <label class="form-label" for="form3Example7c">Date</label> -->
-                                                                                        </div>                                                            
-                                                                                    </div>
-                        
-                                                                                    <div class="row">
-                                                                                        <div class="col-12 d-flex justify-content-center text-center">
-                                                                                            <p>To</p>
-                                                                                        </div>
-                                                                                    </div>
-                        
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">event</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">
-                                                                                            <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control">
-                                                                                            <!-- <label class="form-label" for="form3Example7c">Date</label> -->
-                                                                                        </div>                                                            
-                                                                                    </div>
-                        
-                                                                                    <div class="d-flex flex-row align-items-center mb-4">
-                                                                                        <span class="material-symbols-outlined">school</span>
-                                                                                        &nbsp;&nbsp;
-                                                                                        <div class="form-outline flex-fill mb-0">     
-                                                                                            <!-- <input type="" id="form3Example6c" class="form-control" />                                                            -->
-                                                                                            <!-- <label class="form-label" for="form3Example8c">Select Department</label> -->
-                        
-                                                                                            <!-- <br> -->
-                                                                                            <select id="form3Example8c" class="form-control selectpicker" name="department" multiple data-live-search="true">
-                                                                                                <option selected disabled>Select Department</option>
-                                                                                                <option value="cse">Computer Science and Engineering</option>
-                                                                                                <option value="me">Mechanical Engineering</option>
-                                                                                                <option value="ece">Electronics and Communication Engineering</option>
-                                                                                                <option value="eee">Electrical and Electronics Engineering</option>
-                                                                                                <option value="ce">Civil Engineering</option>
-                                                                                                <option value="che">Chemical Engineering</option>
-                                                                                                <option value="ae">Aerospace Engineering</option>
-                                                                                                <option value="ai">Computer Science and Engineering (Artificial Intelligence)</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                                                                        <button type="submit" id="hello_success-btn" herf="#alert_success" class="btn btn-primary btn-lg">Submit</button>                                                           
-                                                                                    </div>  
-                                                                                    
-                                                                                </form>
-                                                                            </div>
-                                                                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-                                                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>          
-                                                    </div>
-                                                </section>     
-                                                <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>                -->
-                                            </div>
-                                            <!-- <div class="modal-footer">
-                                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
-                                                    Back Event Details
-                                                </button>
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="card-text">
-                                    <% var start_1 = eventdeatils[i].dateTime[0].split("T") %>
-                                <% var end_1 = eventdeatils[i].dateTime[1].split("T") %>
-                                <%= start_1[0] %> - <%= start_1[1] %> to <%= end_1[0] %> - <%= end_1[1] %>
-                                </p>
-                                <% if(Array.isArray(eventdeatils[i].department)){%>                        
-                                <% for(var j=0; j<eventdeatils[i].department.length; j++){ %>
-                                    <a href="#" class="btn btn-primary"><%= eventdeatils[i].department[j] %></a>
-                                    &nbsp;&nbsp;
-                                    <!-- <a href="#" class="btn btn-primary">Electrical</a> -->
-                                <% }}else{%>
-                                    <a href="#" class="btn btn-primary"><%= eventdeatils[i].department %></a>
-                                    &nbsp;&nbsp;
-                                <% } %>
-
-                            </div>
+                        </li>
+                    </ul>        
+            </div>
+            <br>
+        <% } %>
+        
+    <% } %>
+    <hr>
+        <% for(var i=0; i<upcoming_events.length; i++){ %>
+            <% var now = new Date() %>
+            <% var start = new Date(upcoming_events[i].sdt)%>
+            <% var end = new Date(upcoming_events[i].edt)%>
+            <% if (now.getTime() < start.getTime()) { %> 
+                
+                <div class="card">
+                    <% if (newUpcoming) { %>
+                    <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
+                    <% newUpcoming=false}%>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <%- include('event_details',{eventdetails:upcoming_events[i],i:i}) %>
                         </li>
                     </ul>
-                <hr>        
-            </div>
-            <hr>
+                </div>
+                <br>
+            <% } %>
+            
         <% } %>
-    <% } %>
-    <% for(var i=0; i<eventdeatils.length; i++){ %>
+        <hr> 
+
+
+
+    <% for(var i=0; i<past_events.length; i++){ %>
         <% var now = new Date() %>
-        <% console.log(now) %>
-        <% var start = new Date(eventdeatils[i].sdt)%>
-        <% var end = new Date(eventdeatils[i].edt)%>
-        <% console.log(now.getTime()) %>
-        <% console.log(start) %>
-        <% console.log(end) %>
-        <% if (now.getTime() < start.getTime()) { %>       
-            <div class="card">
-                <% if (newUpcoming) { %>
-                <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
-                <% newUpcoming=false}%>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= eventdeatils[i].Event_name %></h5>
-                            <p class="card-text">
-                                <%= console.log("hello_alert-box")  %>
-                                
-                                <%= console.log(eventdeatils[i].edt.toUTCString().replace('GMT', '')) %>
-                                <% var start_1 = eventdeatils[i].sdt.toUTCString().replace('GMT', '') %>
-                                <% var end_1 = eventdeatils[i].edt.toUTCString().replace('GMT', '') %>
-                                <div>
-                                    <h6>Start Time : <%= start_1%></h6>
-                                    <h6>End Time : <%= end_1%></h6>
-                                </div>
-                            </p>
-                            <% if(Array.isArray(eventdeatils[i].dept)){%>                        
-                            <% for(var j=0; j<eventdeatils[i].dept.length; j++){ %>
-                                <a href="#" class="btn btn-primary"><%= eventdeatils[i].dept[j] %></a>
-                                &nbsp;&nbsp;
-                                <!-- <a href="#" class="btn btn-primary">Electrical</a> -->
-                            <% }}else{%>
-                                <a href="#" class="btn btn-primary"><%= eventdeatils[i].dept %></a>
-                                &nbsp;&nbsp;
-                            <% } %>
-                        </div>
-                    </li>
-                </ul>
-            </div> 
-            <hr> 
-        <% } %>
-    <% } %>
-    <% for(var i=0; i<eventdeatils.length; i++){ %>
-        <% var now = new Date() %>
-        <% console.log(now) %>
-        <% var start = new Date(eventdeatils[i].sdt)%>
-        <% var end = new Date(eventdeatils[i].edt)%>
-        <% console.log(now.getTime()) %>
-        <% console.log(start) %>
-        <% console.log(end) %>      
-        <% if(now.getTime() > start.getTime()) { %>
+        <% var start = new Date(past_events[i].sdt)%>
+        <% var end = new Date(past_events[i].edt)%>
+        <% if(now.getTime() > start.getTime() && now.getTime()>end.getTime()) { %>
             <div class="card">
                 <% if (newPast) { %>
                 <h5 class="card-title"><h3 class="card-header">Past Events</h3></h5>
                 <% newPast=false}%>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= eventdeatils[i].event %></h5>
-                            <p class="card-text">
-                                <% var start_1 = eventdeatils[i].dateTime[0].split("T") %>
-                                <% var end_1 = eventdeatils[i].dateTime[1].split("T") %>
-                                <%= start_1[0] %> - <%= start_1[1] %> to <%= end_1[0] %> - <%= end_1[1] %>
-                            </p>
-                            <% if(Array.isArray(eventdeatils[i].department)){%>                        
-                            <% for(var j=0; j<eventdeatils[i].department.length; j++){ %>
-                                <a href="#" class="btn btn-primary"><%= eventdeatils[i].department[j] %></a>
-                                &nbsp;&nbsp;
-                                <!-- <a href="#" class="btn btn-primary">Electrical</a> -->
-                            <% }}else{%>
-                                <a href="#" class="btn btn-primary"><%= eventdeatils[i].department %></a>
-                                &nbsp;&nbsp;
-                            <% } %>
-                        </div>
+                        <%- include('event_details',{eventdetails:past_events[i],i:i}) %>
+                        
                     </li>
                 </ul>
             </div>
+            <br>
         <% } %>
     <% } %>
+    <hr>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <%- include('footer'); -%>

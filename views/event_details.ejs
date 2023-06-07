@@ -1,0 +1,467 @@
+<div class="card-body">
+    <h3 class="card-title" data-mdb-toggle="modal" href="#exampleModalToggle<%=i%>">
+        <div class="btn btn-primary">
+            <%= eventdetails.Event_name %>
+        </div>
+    </h3>
+    <!-- <a class="btn btn-primary" data-mdb-toggle="modal" href="#exampleModalToggle1" role="button">Open first modal</a> -->
+    <!-- First modal dialog -->
+    <div class="modal fade modal-dialog-scrollable" id="exampleModalToggle<%=i%>" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Event Details</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                    <!-- <span class="material-symbols-outlined" data-bs-dismiss="modal">close</span> -->
+                </div>
+                <br>
+                <div class="row_header mx-auto" style="width: 1000px;">
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Event</h5>
+                        </div>
+                        <div class="col-sm-9">
+                            <p>
+                                <%= eventdetails.Event_name %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Event Description</h5>
+                        </div>
+                        <div class="col-sm-9">
+                            <p>
+                                <%= eventdetails.descp %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Guest Name</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <p>
+                                <%= eventdetails.guestname %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- guest mail  -->
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Guest Email</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <p>
+                                <%= eventdetails.guestmail %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Guest phone Number -->
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Guest Phone Number</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <p>
+                                <%= eventdetails.guestnum %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Mode -->
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Mode</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <p>
+                                <% if (eventdetails.mode == "option1") { %>
+                                    Online
+                                <% }else{%>
+                                    Offline
+                                <% } %>
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- platform -->
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Platform</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <p>
+                                <%= eventdetails.platform %>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Date -->
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Date</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <p>
+                                <% var start_1=eventdetails.sdt.toLocaleString("en-GB", {timeZone: "Asia/Kolkata" }) %>
+                                <% var end_1=eventdetails.edt.toLocaleString("en-GB", {timeZone: "Asia/Kolkata" }) %>
+                                        <div>
+                                            <h6>Start Time : <%= start_1%>
+                                            </h6>
+                                            <h6>End Time : <%= end_1%>
+                                            </h6>
+                                        </div>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Department -->
+                    <div class="row">
+                        <div class="col-sm-3 pr-3">
+                            <h5 class="modal-title">Department</h5>
+                        </div>
+                        <div class="col-sm-9 d-flex justify-content-start">
+                            <h5>
+                                <% if(Array.isArray(eventdetails.dept)){%>                        
+                                    <% for(var j=0; j<eventdetails.dept.length; j++){ %>
+                                        <a href="#" class="badge rounded-pill badge-primary"><%= eventdetails.dept[j].toUpperCase() %></a>
+                                        &nbsp;&nbsp;
+                                        <!-- <a href="#" class="btn btn-primary">Electrical</a> -->
+                                    <% }}else{%>
+                                        <a href="#" class="badge rounded-pill badge-primary"><%= eventdetails.dept.toUpperCase() %></a>
+                                        &nbsp;&nbsp;
+                                <% } %>
+                                </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>3"
+                        data-mdb-toggle="modal" data-mdb-dismiss="modal">
+                        Update
+                    </button>
+                    <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>2"
+                        data-mdb-toggle="modal" data-mdb-dismiss="modal">
+                        Join-Discussion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Second modal dialog -->
+    <div class="modal fade" id="exampleModalToggle<%= i %>2" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel<%= i %>2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2">
+                        <%= eventdetails.event %>
+                    </h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section style="background-color: white;" class="">
+                        <div class="container py-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-6 col-lg-7 col-xl-8">
+                                    <ul class="list-unstyled">
+                                        <li class="d-flex justify-content-between mb-4">
+                                            <div class="card w-100">
+                                                <div class="card-header d-flex justify-content-between p-3">
+                                                    <p class="fw-bold mb-0">Lara Croft</p>
+                                                    <p class="text-muted small mb-0"><i class="far fa-clock"></i> 13
+                                                        mins ago</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-0">
+                                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                                        accusantium
+                                                        doloremque laudantium.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!-- <span class="material-icons-outlined rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60" style="font-size: 50px;">account_circle</span>                                                     -->
+
+                                            <!-- <img src="https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
+                                                alt="avatar" class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60"> -->
+                                        </li>
+                                        <li class="d-flex justify-content-between mb-4">
+                                            <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
+                                                alt="avatar"
+                                                class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                                width="60">
+                                            <div class="card">
+                                                <div class="card-header d-flex justify-content-between p-3">
+                                                    <p class="fw-bold mb-0">Brad Pitt</p>
+                                                    <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10
+                                                        mins ago</p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-0">
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                        eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="bg-white mb-3">
+                                            <div class="form-outline">
+                                                <textarea class="form-control" id="textAreaExample2"
+                                                    rows="4"></textarea>
+                                                <label class="form-label" for="textAreaExample2">Message</label>
+                                            </div>
+                                        </li>
+                                        <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
+                        Back Event Details
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <!-- Updation -->
+    <div class="modal fade" id="exampleModalToggle<%= i %>3" aria-hidden="true"
+        aria-labelledby="exampleModalToggleLabel<%= i %>3" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2">
+                        <%= eventdetails.event %>
+                    </h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <section class="vh-100">
+                        <div class="container h-100">
+                            <div class="row d-flex justify-content-center align-items-center h-100">
+                                <div class="col-lg-12 col-xl-11">
+                                    <div class="card text-black" style="border-radius: 25px;">
+                                        <div class="card-body p-md-5">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                                    <!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Event</p>
+                                                    <div class="btn" data-bs-dismiss="modal">
+                                                        <i class="material-icons">highlight_off</i>
+                                                    </div> -->
+
+                                                    <form class="mx-1 mx-md-4" action="/added_event" method="post">
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">title</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="text" name="event" id="form3Example1c"
+                                                                    class="form-control" />
+                                                                <label class="form-label" for="form3Example1c">Event
+                                                                    Name</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">description</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <textarea id="form3Example2c" class="form-control"
+                                                                    name="eDescription" rows="1"></textarea>
+                                                                <!-- <input type="text" id="form3Example1c"  class="form-control" /> -->
+                                                                <label class="form-label"
+                                                                    for="form3Example2c">Description</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">person</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="text" id="form3Example3c" name="gName"
+                                                                    class="form-control" />
+                                                                <label class="form-label" for="form3Example3c">Guest
+                                                                    Name</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">mail</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="email" id="form3Example4c" name="gMail"
+                                                                    class="form-control" />
+                                                                <label class="form-label" for="form3Example4c">Guest
+                                                                    Email</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">call</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="tel" id="form3Example5c" name="gPhone"
+                                                                    class="form-control" />
+                                                                <label class="form-label" for="form3Example5c">Guest
+                                                                    Phone</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">groups</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="inlineRadioOptions" id="inlineRadio1"
+                                                                    value="option1" />
+                                                                <label class="form-check-label"
+                                                                    for="inlineRadio1">Online</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="inlineRadioOptions" id="inlineRadio2"
+                                                                    value="option2" />
+                                                                <label class="form-check-label"
+                                                                    for="inlineRadio2">Offline</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">location_on</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="" id="form3Example6c" name="platform"
+                                                                    class="form-control" />
+                                                                <label class="form-label"
+                                                                    for="form3Example6c">Platform</label>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">today</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="datetime-local" name="dateTime"
+                                                                    id="form3Example7c" class="form-control">
+                                                                <!-- <label class="form-label" for="form3Example7c">Date</label> -->
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">event</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="datetime-local" name="dateTime"
+                                                                    id="form3Example7c" value="Date"
+                                                                    class="form-control">
+                                                                <!-- <label class="form-label" for="form3Example7c">Date</label> -->
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div
+                                                                class="col-12 d-flex justify-content-center text-center">
+                                                                <p>To</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">event</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <input type="datetime-local" name="dateTime"
+                                                                    id="form3Example7c" class="form-control">
+                                                                <!-- <label class="form-label" for="form3Example7c">Date</label> -->
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="d-flex flex-row align-items-center mb-4">
+                                                            <span class="material-symbols-outlined">school</span>
+                                                            &nbsp;&nbsp;
+                                                            <div class="form-outline flex-fill mb-0">
+                                                                <!-- <input type="" id="form3Example6c" class="form-control" />                                                            -->
+                                                                <!-- <label class="form-label" for="form3Example8c">Select Department</label> -->
+
+                                                                <!-- <br> -->
+                                                                <select id="form3Example8c"
+                                                                    class="form-control selectpicker" name="department"
+                                                                    multiple data-live-search="true">
+                                                                    <option selected disabled>Select Department</option>
+                                                                    <option value="cse">Computer Science and Engineering
+                                                                    </option>
+                                                                    <option value="mee">Mechanical Engineering</option>
+                                                                    <option value="ece">Electronics and Communication
+                                                                        Engineering</option>
+                                                                    <option value="eee">Electrical and Electronics
+                                                                        Engineering</option>
+                                                                    <option value="cie">Civil Engineering</option>
+                                                                    <option value="che">Chemical Engineering</option>
+                                                                    <option value="aee">Aerospace Engineering</option>
+                                                                    <option value="aie">Computer Science and Engineering
+                                                                        (Artificial Intelligence)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                                            <button type="submit" id="hello_success-btn"
+                                                                herf="#alert_success"
+                                                                class="btn btn-primary btn-lg">Submit</button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                                <div
+                                                    class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                                        class="img-fluid" alt="Sample image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>                -->
+                </div>
+                <!-- <div class="modal-footer">
+                    <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
+                        Back Event Details
+                    </button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <p class="card-text">
+        <% var start_1=eventdetails.sdt.toLocaleString("en-GB", {timeZone: "Asia/Kolkata" }) %>
+            <% var end_1=eventdetails.edt.toLocaleString("en-GB", {timeZone: "Asia/Kolkata" }) %>
+                <div>
+                    <h6>Start Time : <%= start_1%>
+                    </h6>
+                    <h6>End Time : <%= end_1%>
+                    </h6>
+                </div>
+    </p>
+    <h5>
+    <% if(Array.isArray(eventdetails.dept)){%>                        
+        <% for(var j=0; j<eventdetails.dept.length; j++){ %>
+            <a href="#" class="badge rounded-pill badge-primary"><%= eventdetails.dept[j].toUpperCase() %></a>
+            &nbsp;&nbsp;
+            <!-- <a href="#" class="btn btn-primary">Electrical</a> -->
+        <% }}else{%>
+            <a href="#" class="badge rounded-pill badge-primary"><%= eventdetails.dept.toUpperCase() %></a>
+            &nbsp;&nbsp;
+    <% } %>
+    </h5>
+</div>
