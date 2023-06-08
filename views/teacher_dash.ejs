@@ -329,39 +329,35 @@
                 <% newOngoing=false } %>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <%- include('event_details',{eventdetails:ongoing_events[i],i:i,role:role,register:false}) %>
-                            
+                            <%- include('event_details',{eventdetails:ongoing_events[i],i:i,role:role,register:false}) %>                            
                         </li>
                     </ul>        
             </div>
             <br>
-        <% } %>
-        
+        <% } %>               
+    <% } %>
+    <hr> 
+
+    <% for(var i=0; i<upcoming_events.length; i++){ %>
+        <% var now = new Date() %>
+        <% var start = new Date(upcoming_events[i].sdt)%>
+        <% var end = new Date(upcoming_events[i].edt)%>
+        <% if (now.getTime() < start.getTime()) { %> 
+            
+            <div class="card">
+                <% if (newUpcoming) { %>
+                <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
+                <% newUpcoming=false}%>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <%- include('event_details',{eventdetails:upcoming_events[i],i:i,role:role,register:true}) %>
+                    </li>
+                </ul>
+            </div>
+            <br>
+        <% } %>                     
     <% } %>
     <hr>
-        <% for(var i=0; i<upcoming_events.length; i++){ %>
-            <% var now = new Date() %>
-            <% var start = new Date(upcoming_events[i].sdt)%>
-            <% var end = new Date(upcoming_events[i].edt)%>
-            <% if (now.getTime() < start.getTime()) { %> 
-                
-                <div class="card">
-                    <% if (newUpcoming) { %>
-                    <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
-                    <% newUpcoming=false}%>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <%- include('event_details',{eventdetails:upcoming_events[i],i:i,role:role,register:true}) %>
-                        </li>
-                    </ul>
-                </div>
-                <br>
-            <% } %>
-            
-        <% } %>
-        <hr> 
-
-
 
     <% for(var i=0; i<past_events.length; i++){ %>
         <% var now = new Date() %>
@@ -374,13 +370,13 @@
                 <% newPast=false}%>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <%- include('event_details',{eventdetails:past_events[i],i:i,role:role,register:false}) %>
-                        
+                        <% console.log(past_events) %>
+                        <%- include('event_details',{eventdetails:past_events[i],i:i,role:role,register:true}) %>
                     </li>
                 </ul>
             </div>
             <br>
-        <% } %>
+        <% } %>                
     <% } %>
     <hr>
 </div>
