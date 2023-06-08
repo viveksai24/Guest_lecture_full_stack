@@ -149,23 +149,26 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <% if (role=="admin") { %>
+                            <% if (role=="admin" || role=="teacher") { %>
                             <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>3"
                                 data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                 Update
                             </button>
+                            <% } else if(role=="student") {%>
+                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>4"
+                                    data-mdb-toggle="modal" data-mdb-dismiss="modal">
+                                    Feedback
+                                </button>
                             <% } %>
-                            <% if (role!="admin") { %>
                             <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>2"
                                 data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                 Join-Discussion
                             </button>
-                            <% } %>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Second modal dialog -->
+            <!-- Chat box model dialog -->
             <div class="modal fade" id="exampleModalToggle<%= i %>2" aria-hidden="true"
                 aria-labelledby="exampleModalToggleLabel<%= i %>2" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -244,7 +247,89 @@
                     </div>
                 </div>
             </div>
-            <!-- Updation -->
+            <!-- Feedback form model dialoge-->
+            <div class="modal fade" id="exampleModalToggle<%= i %>4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel<%= i %>4"
+                tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalToggleLabel<%= i %>2"><%= eventdetails.event %></h5>
+                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="card">
+                            <div class="card-header bg-primary">
+                              <h5 class="card-title text-white mt-2" id="exampleModalLabel">Feedback request</h5>
+                            </div>
+                            <div class="modal-body">
+                              <div class="text-center">
+                                <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
+                                <p>
+                                  <strong>Your opinion matters</strong>
+                                </p>
+                                <p>
+                                  Have some ideas how to improve our product?
+                                  <strong>Give us your feedback.</strong>
+                                </p>
+                              </div>
+                        
+                              <hr />
+                        
+                              <form class="px-4" action="">
+                                <p class="text-center"><strong>Your rating:</strong></p>
+                        
+                                <div class="form-check mb-2">
+                                  <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example1" />
+                                  <label class="form-check-label" for="radio3Example1">
+                                    Very good
+                                  </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                  <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example2" />
+                                  <label class="form-check-label" for="radio3Example2">
+                                    Good
+                                  </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                  <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example3" />
+                                  <label class="form-check-label" for="radio3Example3">
+                                    Medicore
+                                  </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                  <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example4" />
+                                  <label class="form-check-label" for="radio3Example4">
+                                    Bad
+                                  </label>
+                                </div>
+                                <div class="form-check mb-2">
+                                  <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example5" />
+                                  <label class="form-check-label" for="radio3Example5">
+                                    Very bad
+                                  </label>
+                                </div>
+                        
+                                <p class="text-center"><strong>What could we improve?</strong></p>
+                        
+                                <!-- Message input -->
+                                <div class="form-outline mb-4">
+                                  <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                                  <label class="form-label" for="form4Example3">Your feedback</label>
+                                </div>
+                              </form>
+                            </div>
+                            <div class="card-footer text-end">
+                              <button type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                          </div>
+                        <!-- <div class="modal-footer">
+                            <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
+                                Back Event Details
+                            </button>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Updation form model dialoge-->
             <div class="modal fade" id="exampleModalToggle<%= i %>3" aria-hidden="true"
                 aria-labelledby="exampleModalToggleLabel<%= i %>3" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
