@@ -316,8 +316,13 @@
     <% ongoing_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
     <% upcoming_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
     <% past_events.sort(function(a,b){return new Date(b.sdt) - new Date(a.sdt)}) %>
+    <!-- variables for storing lengths of  ongoing,past and future event lists-->
+    <% var ongoing = ongoing_events.length %>
+    <% var upcoming = upcoming_events.length %>
+    <% var past = past_events.length %>
     <!-- vivek  -->
     <!-- .toLocaleString("en-GB", {timeZone: "Asia/Kolkata"}) -->
+
     <% for(var i=0; i<ongoing_events.length; i++){ %>
         <% var now = new Date() %>
         <% var start = new Date(ongoing_events[i].sdt)%>
@@ -336,28 +341,28 @@
             <br>
         <% } %>               
     <% } %>
-    <hr> 
-
-    <% for(var i=0; i<upcoming_events.length; i++){ %>
-        <% var now = new Date() %>
-        <% var start = new Date(upcoming_events[i].sdt)%>
-        <% var end = new Date(upcoming_events[i].edt)%>
-        <% if (now.getTime() < start.getTime()) { %> 
-            
-            <div class="card">
-                <% if (newUpcoming) { %>
-                <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
-                <% newUpcoming=false}%>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <%- include('event_details',{eventdetails:upcoming_events[i],i:i,role:role,register:true}) %>
-                    </li>
-                </ul>
-            </div>
-            <br>
-        <% } %>                     
-    <% } %>
     <hr>
+        <% for(var i=0; i<upcoming_events.length; i++){ %>
+            <% var now = new Date() %>
+            <% var start = new Date(upcoming_events[i].sdt)%>
+            <% var end = new Date(upcoming_events[i].edt)%>
+            <% if (now.getTime() < start.getTime()) { %> 
+                
+                <div class="card">
+                    <% if (newUpcoming) { %>
+                    <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
+                    <% newUpcoming=false}%>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <%- include('event_details',{eventdetails:upcoming_events[i],i:i,role:role,register:true}) %>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+            <% } %>
+            
+        <% } %>
+        <hr> 
 
     <% for(var i=0; i<past_events.length; i++){ %>
         <% var now = new Date() %>
@@ -370,8 +375,8 @@
                 <% newPast=false}%>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <% console.log(past_events) %>
-                        <%- include('event_details',{eventdetails:past_events[i],i:i,role:role,register:true}) %>
+                        <%- include('event_details',{eventdetails:past_events[i],i:i,role:role,register:false}) %>
+                        
                     </li>
                 </ul>
             </div>
