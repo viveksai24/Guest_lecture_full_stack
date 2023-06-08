@@ -147,8 +147,7 @@ app.get('/teacher_dash',async(req,res)=>{
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
                     dept:depts
-                });
-                
+                });                
             }
         }
         boo = false;
@@ -236,8 +235,7 @@ app.post('/added_event',function(req,res){
                         console.log(err);
                     }else{
                         console.log(result);
-                    }
-        
+                    }        
                 });
             }
         }
