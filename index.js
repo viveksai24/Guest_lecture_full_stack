@@ -229,15 +229,27 @@ app.post('/added_event',function(req,res){
             console.log(err)
         }else{
             var eventid = result.insertId;
-            for (var i=0; i<req.body.department.length;i++){
-                pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
-                    if(err){
-                        console.log(err);
-                    }else{
-                        console.log(result);
-                    }        
-                });
-            }
+            
+               if(Array.isArray(req.body.department)){
+                    for (var i=0; i<req.body.department.length;i++){
+                        pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
+                            if (err){
+                                console.log(err);
+                            }else{
+                                console.log(result);
+                            }
+                        });
+                    }                
+                }else{
+                    pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department}, (err,result,feilds) => {
+                        if (err){
+                            console.log(err);
+                        }else{
+                            console.log(result);
+                        }
+                    });
+                }    
+            
         }
     });
 
