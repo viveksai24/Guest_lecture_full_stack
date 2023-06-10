@@ -79,6 +79,38 @@
 
 <br>
 <div class="container w-75 p-5 justify-content-center">
+    
+<% if (isRegistered) { %>
+    <div class="alert alert-success justify-content-center" role="alert">
+        <div class="d-flex flex-column mb-3">
+            <div class="p-2 justify-content-center text-center">    <span class="material-symbols-outlined justify-content-center" style="font-size: 75px;">
+                check_circle
+            </span>
+        </div>
+        </div>
+        <div class="text-center">
+            <strong>Success!</strong> Registered successfully!
+        </div>
+    </div>
+
+    <script>
+        window.setTimeout(function() {
+            var alertElement = document.querySelectorAll('.alert')[0];
+            alertElement.style.transition = 'opacity 0.5s linear';
+            alertElement.style.opacity = '0';
+            setTimeout(function() {
+                alertElement.style.transition = 'height 0.5s ease-in-out';
+                alertElement.style.height = '0';
+                setTimeout(function() {
+                    alertElement.parentNode.removeChild(alertElement);
+                }, 1000);
+            }, 1000);
+        }, 2000);
+    </script>
+<% } %>
+
+<br>
+
 <div style="border-bottom: 10px;">
     <h2>Events</h2>
 </div>  

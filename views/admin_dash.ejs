@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- navigation bars -->
+    <link rel="icon" href="https://raw.githubusercontent.com/viveksai24/Guest_lecture_full_stack/main/images/logo_glm-removebg-preview.png" type = "image/x-icon"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="/stylesheets/about_style.css" type="text/css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="/test.css"> -->
+
+    <!-- dashboards -->
+    <!-- bundle -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- google icons and icons-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" href="https://raw.githubusercontent.com/viveksai24/Guest_lecture_full_stack/main/images/logo_glm-removebg-preview.png" type="image/x-icon"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- style sheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet"/>
+    <!-- drop down -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <title>Dashboard</title>
+
+    <style>
+        .hello_alert-box {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;  
+        }
+
+        .hello_success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+            display: none;
+        }
+        #oval_parent{
+            background: #eee;
+            width:200px;
+            height:120px;
+            overflow:hidden;
+        }
+        #navbarSupportedContent ul li a{
+            color: white;
+        }
+        #navbar-brand{
+            color: white;
+        }
+        #oval{
+            /* width: 220px;
+            height: 100px;
+            margin:10px 0 0 -10px;  
+            background: white; */
+            -moz-border-radius: 100px / 50px;
+            -webkit-border-radius: 100px / 50px;
+            border-radius: 100px / 50px;
+        }
+    </style>
+  </head>
+
+<%- include('header',{name:name}); -%>
+
+
+<br>
+<br>
+<div class="container w-75 p-5 justify-content-center">
+    <div class="float-right" align="right">
+        <button type="button" class="btn btn-secondary  btn-lg" data-bs-toggle="modal" data-bs-target="#kt_modal_scrollable_2">
+            Add +
+        </button>
+        <div class="modal fade" tabindex="-1" id="kt_modal_scrollable_2">
+            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Create Event</h5>            
+                        <!--begin::Close-->
+                        <button type="button" class="btn btn-light">
+                            <i class="material-icons" data-bs-dismiss="modal">highlight_off</i>
+                        </button>
+                            
+                        
+                        <!--end::Close-->
+                    </div>
+                    <div class="modal-body">
+                        <section class="vh-100">
+                            <div class="container h-100">
+                                <div class="row d-flex justify-content-center align-items-center h-100">
+                                    <div class="col-lg-12 col-xl-11">
+                                        <div class="card text-black" style="border-radius: 25px;">
+                                            <div class="card-body p-md-5">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                    
+                                                        <!-- <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Event</p>
+                                                        <div class="btn" data-bs-dismiss="modal">
+                                                            <i class="material-icons">highlight_off</i>
+                                                        </div> -->
+                    
+                                                        <form class="mx-1 mx-md-4" action="/added_event" method="post" >
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">title</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="text" name="event" id="form3Example1c" class="form-control" required/>
+                                                                    <label class="form-label" for="form3Example1c">Event Name</label>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">description</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <textarea id="form3Example2c" class="form-control" name="eDescription" rows="1" required></textarea>
+                                                                    <!-- <input type="text" id="form3Example1c"  class="form-control" /> -->
+                                                                    <label class="form-label" for="form3Example2c">Description</label>
+                                                                </div>
+                                                            </div>
+                    
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">person</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="text" id="form3Example3c" name="gName" class="form-control" required/>
+                                                                    <label class="form-label" for="form3Example3c">Guest Name</label>
+                                                                </div>
+                                                            </div>
+                    
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">mail</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="email" id="form3Example4c" name="gMail" class="form-control" required/>
+                                                                    <label class="form-label" for="form3Example4c">Guest Email</label>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">call</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="tel" id="form3Example5c" name="gPhone" class="form-control" required/>
+                                                                    <label class="form-label" for="form3Example5c">Guest Phone</label>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="d-flex flex-row align-items-center mb-4"> 
+                                                                <span class="material-symbols-outlined">groups</span>  
+                                                                &nbsp;&nbsp;                                                     
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required/>
+                                                                    <label class="form-check-label" for="inlineRadio1">Online</label>
+                                                                </div>                                                            
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" required/>
+                                                                    <label class="form-check-label" for="inlineRadio2">Offline</label>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">location_on</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="" id="form3Example6c" name="platform" class="form-control" required/>
+                                                                    <label class="form-label" for="form3Example6c">Platform</label>
+                                                                </div>
+                                                            </div>  
+    
+    
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">today</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control" required/>
+                                                                    <!-- <label class="form-label" for="form3Example7c">Date</label> -->
+                                                                </div>                                                            
+                                                            </div>
+
+                                                            <!-- <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">event</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control"> -->
+                                                                    <!-- <label class="form-label" for="form3Example7c">Date</label> -->
+                                                                <!-- </div>                                                            
+                                                            </div> -->
+
+                                                            <div class="row">
+                                                                <div class="col-12 d-flex justify-content-center text-center">
+                                                                    <p>To</p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">event</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">
+                                                                    <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control" required/>
+                                                                    <!-- <label class="form-label" for="form3Example7c">Date</label> -->
+                                                                </div>                                                            
+                                                            </div>
+
+                                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                                <span class="material-symbols-outlined">school</span>
+                                                                &nbsp;&nbsp;
+                                                                <div class="form-outline flex-fill mb-0">     
+                                                                    <!-- <input type="" id="form3Example6c" class="form-control" />                                                            -->
+                                                                    <!-- <label class="form-label" for="form3Example8c">Select Department</label> -->
+
+                                                                    <!-- <br> -->
+                                                                    <select id="form3Example8c" class="form-control selectpicker" name="department" multiple required data-live-search="true">
+                                                                        <option selected disabled>Select Department</option>
+                                                                        <option value="cse">Computer Science and Engineering</option>
+                                                                        <option value="mee">Mechanical Engineering</option>
+                                                                        <option value="ece">Electronics and Communication Engineering</option>
+                                                                        <option value="eee">Electrical and Electronics Engineering</option>
+                                                                        <option value="cie">Civil Engineering</option>
+                                                                        <option value="che">Chemical Engineering</option>
+                                                                        <option value="aee">Aerospace Engineering</option>
+                                                                        <option value="aie">Computer Science and Engineering (Artificial Intelligence)</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                                                <button type="submit" id="hello_success-btn" herf="#alert_success" class="btn btn-primary btn-lg">Submit</button>                                                           
+                                                            </div>  
+                                                            
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>          
+                            </div>
+                        </section>                    
+                    </div>                
+                </div>
+            </div>
+        </div>
+    </div>   
+    <br>
+    <% if (isAdded) { %>
+        <div class="alert alert-success justify-content-center" role="alert">
+            <div class="d-flex flex-column mb-3">
+                <div class="p-2 justify-content-center text-center">    <span class="material-symbols-outlined justify-content-center" style="font-size: 75px;">
+                    check_circle
+                </span>
+            </div>
+            </div>
+            <div class="text-center">
+                <strong>Success!</strong> Event created successfully!
+            </div>
+        </div>
+    
+        <script>
+            window.setTimeout(function() {
+                var alertElement = document.querySelectorAll('.alert')[0];
+                alertElement.style.transition = 'opacity 0.5s linear';
+                alertElement.style.opacity = '0';
+                setTimeout(function() {
+                    alertElement.style.transition = 'height 0.5s ease-in-out';
+                    alertElement.style.height = '0';
+                    setTimeout(function() {
+                        alertElement.parentNode.removeChild(alertElement);
+                    }, 1000);
+                }, 1000);
+            }, 2000);
+        </script>
+    <% } %>
+
+    <br>
+    <div style="border-bottom: 10px;">
+        <h2>Events</h2>
+    </div>  
+    <hr>  
+    <% var newPast = true;%>
+    <% var newOngoing = true;%>
+    <%var newUpcoming =true;%>
+    <!-- vivek -->
+    <% var ongoing_events = []%>
+    <% var upcoming_events = []%>
+    <% var past_events = []%>
+    <% for(var i=0; i<eventdetails.length; i++){ %>
+        <% var now = new Date() %>
+        <% var start = new Date(eventdetails[i].sdt)%>
+        <% var end = new Date(eventdetails[i].edt)%>
+        <% if (now.getTime() < start.getTime()) { %>
+            <% upcoming_events.push(eventdetails[i]) %>
+        <% } %>
+        <% if (now.getTime()>= start.getTime() && now.getTime() <= end.getTime()) { %>
+            <% ongoing_events.push(eventdetails[i]) %>
+        <% } %>
+        <% if (now.getTime() > end.getTime()) { %>
+            <% past_events.push(eventdetails[i]) %>
+        <% } %>
+    <% } %>
+    <!-- sort the ongoing, upcoming, past events based on dates -->
+    <% ongoing_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
+    <% upcoming_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
+    <% past_events.sort(function(a,b){return new Date(b.sdt) - new Date(a.sdt)}) %>
+    <!-- variables for storing lengths of  ongoing,past and future event lists-->
+    <% var ongoing = ongoing_events.length %>
+    <% var upcoming = upcoming_events.length %>
+    <% var past = past_events.length %>
+    <!-- vivek  -->
+    <!-- .toLocaleString("en-GB", {timeZone: "Asia/Kolkata"}) -->
+
+    <% for(var i=0; i<ongoing_events.length; i++){ %>
+        <% var now = new Date() %>
+        <% var start = new Date(ongoing_events[i].sdt)%>
+        <% var end = new Date(ongoing_events[i].edt)%>
+        <% if (now.getTime()>= start.getTime() && now.getTime() <= end.getTime()) { %>
+            <div class="card">
+                <% if (newOngoing) { %>
+                <h1 class="card-title"><h3 class="card-header">Ongoing Events</h3></h1>
+                <% newOngoing=false } %>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <%- include('event_details',{eventdetails:ongoing_events[i],i:i,role:role,register:false}) %>
+                            
+                        </li>
+                    </ul>        
+            </div>
+            <br>
+        <% } %>               
+    <% } %>
+    <hr>
+        <% for(var i=0; i<upcoming_events.length; i++){ %>
+            <% var now = new Date() %>
+            <% var start = new Date(upcoming_events[i].sdt)%>
+            <% var end = new Date(upcoming_events[i].edt)%>
+            <% if (now.getTime() < start.getTime()) { %> 
+                
+                <div class="card">
+                    <% if (newUpcoming) { %>
+                    <h5 class="card-title"><h3 class="card-header">Upcoming Events</h3></h5>
+                    <% newUpcoming=false}%>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <%- include('event_details',{eventdetails:upcoming_events[i],i:(i+ongoing),role:role,register:true}) %>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+            <% } %>
+            
+        <% } %>
+        <hr> 
+
+    <% for(var i=0; i<past_events.length; i++){ %>
+        <% var now = new Date() %>
+        <% var start = new Date(past_events[i].sdt)%>
+        <% var end = new Date(past_events[i].edt)%>
+        <% if(now.getTime() > start.getTime() && now.getTime()>end.getTime()) { %>
+            <div class="card">
+                <% if (newPast) { %>
+                <h5 class="card-title"><h3 class="card-header">Past Events</h3></h5>
+                <% newPast=false}%>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <%- include('event_details',{eventdetails:past_events[i],i:(i+ongoing+upcoming),role:role,register:false}) %>
+                        
+                    </li>
+                </ul>
+            </div>
+            <br>
+        <% } %>                
+    <% } %>
+    <hr>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+<%- include('footer'); -%>
+</body>
+</html>

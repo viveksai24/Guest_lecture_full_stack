@@ -30,8 +30,107 @@ let month = ("0" + (date_time.getMonth() + 1)).slice(-2);
 let year = date_time.getFullYear();
 
 // going to student dash from about us page
-app.get('/stuDash',function(req,res){
-    res.render('/stu_dash',{username: sessionstorage.getItem('username')});
+app.get('/stuDash',async(req,res)=>{
+    var name = sessionstorage.getItem('name');
+    var username = sessionstorage.getItem('username');
+    var role = sessionstorage.getItem('role');
+    const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+    var final = [];
+    var depts;
+    var boo = true;
+    pool.query('SELECT * FROM event_details;',async (err,result1)=>{
+        if(err){
+            console.log(err);
+        }else{
+            for (var i=0; i<result1.length;i++){
+                var depts = [];
+                var booo = true;
+                pool.query('SELECT dept FROM event_dep where event_dep.EventID=?;',[result1[i]['EventID']],(err,result2,feilds)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        for (var j=0; j<result2.length;j++){
+                            depts.push(result2[j]['dept']);
+                        }
+                    }
+                    booo = false;
+                });
+                while(booo) await sleep(10);
+                final.push({
+                    EventID: result1[i]['EventID'],
+                    faculty : result1[i].faculty,
+                    Event_name: result1[i].Event_name,
+                    descp: result1[i].descp,
+                    guestname: result1[i].guestname,
+                    linkedIN: result1[i].linkedIN,
+                    guestmail: result1[i].guestmail,
+                    guestnum: result1[i].guestnum,
+                    mode: result1[i].mode,
+                    platform: result1[i].platform,
+                    sdt: result1[i].sdt,
+                    edt: result1[i].edt,
+                    dept:depts
+                });
+                
+            }
+        }
+        boo = false;
+    });
+    while(boo) await sleep(10);
+
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,isRegistered: false});
+});
+
+//this method is for alert box which says registered successfully in student dash.
+app.get('/stuDash1',async(req,res)=>{
+    var name = sessionstorage.getItem('name');
+    var username = sessionstorage.getItem('username');
+    var role = sessionstorage.getItem('role');
+    const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+    var final = [];
+    var depts;
+    var boo = true;
+    pool.query('SELECT * FROM event_details;',async (err,result1)=>{
+        if(err){
+            console.log(err);
+        }else{
+            for (var i=0; i<result1.length;i++){
+                var depts = [];
+                var booo = true;
+                pool.query('SELECT dept FROM event_dep where event_dep.EventID=?;',[result1[i]['EventID']],(err,result2,feilds)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        for (var j=0; j<result2.length;j++){
+                            depts.push(result2[j]['dept']);
+                        }
+                    }
+                    booo = false;
+                });
+                while(booo) await sleep(10);
+                final.push({
+                    EventID: result1[i]['EventID'],
+                    faculty : result1[i].faculty,
+                    Event_name: result1[i].Event_name,
+                    descp: result1[i].descp,
+                    guestname: result1[i].guestname,
+                    linkedIN: result1[i].linkedIN,
+                    guestmail: result1[i].guestmail,
+                    guestnum: result1[i].guestnum,
+                    mode: result1[i].mode,
+                    platform: result1[i].platform,
+                    sdt: result1[i].sdt,
+                    edt: result1[i].edt,
+                    dept:depts
+                });
+                
+            }
+        }
+        boo = false;
+    });
+    while(boo) await sleep(10);
+
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,isRegistered: true});
 });
 
 app.get('/Dashboard', async (req,res) => {
@@ -85,7 +184,9 @@ app.get('/Dashboard', async (req,res) => {
         res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now});
     }
     else if (role == 'student'){
-        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now});
+        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,isRegistered: false});
+    }else if(role=='admin'){
+        res.render('admin_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now, isAdded: false});
     }
 });
 
@@ -258,14 +359,17 @@ app.post('/added_event',function(req,res){
 });
 
 app.post('/register',function(req,res){
-    console.log('register page');
-    pool.query('INSERT INTO register SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
+    console.log(req.body);
+    var eventid = req.body.event_id;
+    var username = sessionstorage.getItem('username');
+    pool.query('INSERT INTO register SET ?', {EventID: eventid,username:username}, (err,result,feilds) => {
         if (err){
             console.log(err);
         }else{
             console.log(result);
         }
     });
+    res.redirect('/stuDash1');
 });
 
 app.get('/',function(req,res){

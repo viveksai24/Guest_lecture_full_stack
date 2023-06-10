@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 08:32 PM
+-- Generation Time: Jun 10, 2023 at 10:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -54,7 +54,11 @@ INSERT INTO `event_dep` (`id`, `EventID`, `dept`) VALUES
 (21, 6022, 'mee'),
 (22, 6022, 'ece'),
 (23, 6022, 'eee'),
-(24, 6022, 'cie');
+(24, 6022, 'cie'),
+(25, 6023, 'ece'),
+(26, 6023, 'cie'),
+(27, 6023, 'eee'),
+(28, 6023, 'che');
 
 -- --------------------------------------------------------
 
@@ -86,7 +90,8 @@ INSERT INTO `event_details` (`EventID`, `faculty`, `Event_name`, `descp`, `guest
 (6018, 'John Doe', 'Computer security', 'adfadsfasdfsa', 'Mark Robber', 'hello', 'mark_robber@gmail.com', '123541523612', NULL, 'hoen', '2023-06-11 01:22:00', '2023-06-11 04:22:00'),
 (6020, 'John Doe', 'AI', 'akjfdbaksdjf', 'Mark Robber', 'hello', 'mark_robber@gmail.com', '1234', 'option2', 'AB-3 - 201', '2023-06-07 10:56:00', '2023-06-07 19:56:00'),
 (6021, 'John Doe', 'AI', 'asdfghfhjkl', 'Mark Robber', 'hello', 'rajinikanth@jackass.com', '+91 923423745', 'option2', 'MS Teams', '2023-06-07 19:38:00', '2023-06-08 01:39:00'),
-(6022, 'John Doe', 'CN', 'asdfghjk', 'asdfghj', 'hello', 'mark_robber@gmail.com', '+91 923423745', 'option1', 'Teams', '2023-06-08 01:00:00', '2023-06-08 06:55:00');
+(6022, 'John Doe', 'CN', 'asdfghjk', 'asdfghj', 'hello', 'mark_robber@gmail.com', '+91 923423745', 'option1', 'Teams', '2023-06-08 01:00:00', '2023-06-08 06:55:00'),
+(6023, 'John Doe', 'Maths', 'This is a event on geometry.', 'Henry Cavil', 'hello', 'henry_c@gmail.com', '2384291049', 'option2', 'Gateway Hotel', '2023-06-09 01:27:00', '2023-06-30 02:27:00');
 
 -- --------------------------------------------------------
 
@@ -114,7 +119,31 @@ INSERT INTO `login` (`Username`, `Password`, `Name`, `Role`, `Dept`) VALUES
 ('cb.en.u4cse20251', 'pass', 'N Roshith', 'student', 'cse'),
 ('harry_potter@cb.amrita.ed', 'pass', 'Harry Potter', 'teacher', 'eee'),
 ('john_doe@cb.amrita.edu', 'pass', 'John Doe', 'teacher', 'cse'),
+('prasanth_admin', 'admin', 'R Prasanth ', 'admin', NULL),
 ('smith_will@cb.amrita.edu', 'pass', 'Will Smith', 'teacher', 'ece');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `register`
+--
+
+CREATE TABLE `register` (
+  `id` int(11) NOT NULL,
+  `EventID` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `register`
+--
+
+INSERT INTO `register` (`id`, `EventID`, `username`) VALUES
+(1, 6001, 'cb.en.u4cse20249'),
+(2, 6001, 'cb.en.u4cse20251'),
+(3, 6001, 'cb.en.u4cse20232'),
+(5, 6023, 'cb.en.u4cse20232'),
+(6, 6023, 'cb.en.u4cse20249');
 
 --
 -- Indexes for dumped tables
@@ -140,6 +169,13 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`Username`);
 
 --
+-- Indexes for table `register`
+--
+ALTER TABLE `register`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `register` (`EventID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -147,13 +183,19 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `event_dep`
 --
 ALTER TABLE `event_dep`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `event_details`
 --
 ALTER TABLE `event_details`
-  MODIFY `EventID` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6023;
+  MODIFY `EventID` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6025;
+
+--
+-- AUTO_INCREMENT for table `register`
+--
+ALTER TABLE `register`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -166,6 +208,12 @@ ALTER TABLE `event_dep`
   ADD CONSTRAINT `eventDel_fk` FOREIGN KEY (`EventID`) REFERENCES `event_details` (`EventID`) ON DELETE CASCADE,
   ADD CONSTRAINT `event_dep_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `event_details` (`EventID`),
   ADD CONSTRAINT `event_fk` FOREIGN KEY (`EventID`) REFERENCES `event_details` (`EventID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `register`
+--
+ALTER TABLE `register`
+  ADD CONSTRAINT `register` FOREIGN KEY (`EventID`) REFERENCES `event_details` (`EventID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

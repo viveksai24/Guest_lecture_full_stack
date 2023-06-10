@@ -150,7 +150,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <% if (role=="admin" || role=="teacher") { %>
+                            <% if (role=="admin") { %>
                             <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>3"
                                 data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                 Update
@@ -576,6 +576,7 @@
         <div class="col-sm-3 p-3">
             <div class="d-flex justify-content-end p-3 my-3">
                 <form action="/register" method="post">
+                    <input type="hidden" name="event_id" value="<%= eventdetails.EventID %>" >
                     <button type="submit" class="btn btn-primary d-inline-flex align-items-center">
                         Register
                     </button>
@@ -585,7 +586,7 @@
         <% } else if(role=="teacher" || role=="admin") {%>
             <div class="col-sm-4 p-4">
                 <div class="d-flex justify-content-end p-3 my-3">
-                    <span class="material-symbols-outlined fa-3x">
+                    <span class="material-symbols-outlined fa-3x" data-mdb-toggle="tooltip" title="Click to view details.">
                         groups
                     </span>
                     &nbsp;&nbsp;
