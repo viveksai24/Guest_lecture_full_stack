@@ -573,7 +573,7 @@
             </h5>
         </div>
         <% if (role=="student" && register==true) { %>
-        <div class="col-sm-4 p-3">
+        <div class="col-sm-3 p-3">
             <div class="d-flex justify-content-end p-3 my-3">
                 <form action="/register" method="post">
                     <button type="submit" class="btn btn-primary d-inline-flex align-items-center">
@@ -582,6 +582,18 @@
                 </form>
             </div>
         </div>
+        <% } else if(role=="teacher" || role=="admin") {%>
+            <div class="col-sm-4 p-4">
+                <div class="d-flex justify-content-end p-3 my-3">
+                    <span class="material-symbols-outlined fa-3x">
+                        groups
+                    </span>
+                    &nbsp;&nbsp;
+                    <div class="justify-content-start text-center">
+                        <h3 style="margin-top: 7px;"> : 0</h3>
+                    </div>
+                </div>
+            </div>
         <% } %>
     </div>
 </div>

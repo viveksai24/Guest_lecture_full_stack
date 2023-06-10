@@ -259,6 +259,13 @@ app.post('/added_event',function(req,res){
 
 app.post('/register',function(req,res){
     console.log('register page');
+    pool.query('INSERT INTO register SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
+        if (err){
+            console.log(err);
+        }else{
+            console.log(result);
+        }
+    });
 });
 
 app.get('/',function(req,res){
