@@ -78,7 +78,7 @@ app.get('/stuDash',async(req,res)=>{
     });
     while(boo) await sleep(10);
 
-    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,isRegistered: false});
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false});
 });
 
 //this method is for alert box which says registered successfully in student dash.
@@ -130,7 +130,7 @@ app.get('/stuDash1',async(req,res)=>{
     });
     while(boo) await sleep(10);
 
-    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,isRegistered: true});
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: true});
 });
 
 app.get('/Dashboard', async (req,res) => {
@@ -180,11 +180,34 @@ app.get('/Dashboard', async (req,res) => {
         boo = false;
     });
     while(boo) await sleep(10);
+    for(var i = 0; i<final.length;i++){
+        var boo = true;
+        pool.query('SELECT * FROM register where register.EventID=?;',[final[i]['EventID']],async (err,result,feilds)=>{
+            var reg_users=[]
+            if(err){
+                console.log(err);
+            }else{
+                for(var j=0;j<result.length;j++){
+                    reg_users.push(result[j]['username']);
+                }
+                final[i]['reg_users'] = reg_users;
+            }
+            boo = false;
+        });
+        while(boo) await sleep(10);
+    }
     if(role == 'teacher'){   
         res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now});
     }
     else if (role == 'student'){
-        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,isRegistered: false});
+        for(var i = 0; i<final.length;i++){
+            if(final[i]['reg_users'].includes(username)){
+                final[i]['isRegistered'] = true;
+            }else{
+                final[i]['isRegistered'] = false;
+            }
+        }
+        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false});
     }else if(role=='admin'){
         res.render('admin_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now, isAdded: false});
     }
@@ -254,10 +277,91 @@ app.get('/teacher_dash',async(req,res)=>{
         boo = false;
     });
     while(boo) await sleep(10);
-    res.render('teacher_dash',{username:username,name:name,role:role, eventdetails:final, isAdded: false});
+    for(var i = 0; i<final.length;i++){
+        var boo = true;
+        pool.query('SELECT * FROM register where register.EventID=?;',[final[i]['EventID']],async (err,result,feilds)=>{
+            var reg_users=[]
+            if(err){
+                console.log(err);
+            }else{
+                for(var j=0;j<result.length;j++){
+                    reg_users.push(result[j]['username']);
+                }
+                final[i]['reg_users'] = reg_users;
+            }
+            boo = false;
+        });
+        while(boo) await sleep(10);
+    }
+    res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now});
 });
 
-app.get('/teacher_dash1',async(req,res)=>{
+app.get('/admin_dash',async(req,res)=>{
+    var name = sessionstorage.getItem('name');
+    var username = sessionstorage.getItem('username');
+    var role = sessionstorage.getItem('role');
+    const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
+    var final = [];
+    var depts;
+    var boo = true;
+    pool.query('SELECT * FROM event_details;',async (err,result1)=>{
+        if(err){
+            console.log(err);
+        }else{
+            for (var i=0; i<result1.length;i++){
+                var depts = [];
+                var booo = true;
+                pool.query('SELECT dept FROM event_dep where event_dep.EventID=?;',[result1[i]['EventID']],(err,result2,feilds)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        for (var j=0; j<result2.length;j++){
+                            depts.push(result2[j]['dept']);
+                        }
+                    }
+                    booo = false;
+                });
+                while(booo) await sleep(10);
+                final.push({
+                    EventID: result1[i]['EventID'],
+                    faculty : result1[i].faculty,
+                    Event_name: result1[i].Event_name,
+                    descp: result1[i].descp,
+                    guestname: result1[i].guestname,
+                    linkedIN: result1[i].linkedIN,
+                    guestmail: result1[i].guestmail,
+                    guestnum: result1[i].guestnum,
+                    mode: result1[i].mode,
+                    platform: result1[i].platform,
+                    sdt: result1[i].sdt,
+                    edt: result1[i].edt,
+                    dept:depts
+                });                
+            }
+        }
+        boo = false;
+    });
+    while(boo) await sleep(10);
+    for(var i = 0; i<final.length;i++){
+        var boo = true;
+        pool.query('SELECT * FROM register where register.EventID=?;',[final[i]['EventID']],async (err,result,feilds)=>{
+            var reg_users=[]
+            if(err){
+                console.log(err);
+            }else{
+                for(var j=0;j<result.length;j++){
+                    reg_users.push(result[j]['username']);
+                }
+                final[i]['reg_users'] = reg_users;
+            }
+            boo = false;
+        });
+        while(boo) await sleep(10);
+    }
+    res.render('admin_dash',{username:username,name:name,role:role, eventdetails:final, isAdded: false,currentdate:now});
+});
+
+app.get('/admin_dash1',async(req,res)=>{
     var name = sessionstorage.getItem('name');
     var username = sessionstorage.getItem('username');
     var role = sessionstorage.getItem('role');
@@ -304,8 +408,24 @@ app.get('/teacher_dash1',async(req,res)=>{
         boo = false;
     });
     while(boo) await sleep(10);
+    for(var i = 0; i<final.length;i++){
+        var boo = true;
+        pool.query('SELECT * FROM register where register.EventID=?;',[final[i]['EventID']],async (err,result,feilds)=>{
+            var reg_users=[]
+            if(err){
+                console.log(err);
+            }else{
+                for(var j=0;j<result.length;j++){
+                    reg_users.push(result[j]['username']);
+                }
+                final[i]['reg_users'] = reg_users;
+            }
+            boo = false;
+        });
+        while(boo) await sleep(10);
+    }
     
-    res.render('teacher_dash',{username:username,name:name,role:role, eventdetails:final, isAdded: true});
+    res.render('admin_dash',{username:username,name:name,role:role, eventdetails:final, isAdded: true,currentdate:now});
 });
 
 app.get('/about',function(req,res){
@@ -355,7 +475,7 @@ app.post('/added_event',function(req,res){
     });
 
     // sessionstoragelist.push(req.body);
-    res.redirect('/teacher_dash1');  
+    res.redirect('/admin_dash1');  
 });
 
 app.post('/register',function(req,res){

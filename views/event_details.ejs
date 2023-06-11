@@ -575,12 +575,14 @@
         <% if (role=="student" && register==true) { %>
         <div class="col-sm-3 p-3">
             <div class="d-flex justify-content-end p-3 my-3">
-                <form action="/register" method="post">
-                    <input type="hidden" name="event_id" value="<%= eventdetails.EventID %>" >
-                    <button type="submit" class="btn btn-primary d-inline-flex align-items-center">
-                        Register
-                    </button>
-                </form>
+                <% if (!eventdetails.isRegistered) { %>
+                    <form action="/register" method="post">
+                        <input type="hidden" name="event_id" value="<%= eventdetails.EventID %>" >
+                        <button type="submit" class="btn btn-primary d-inline-flex align-items-center">
+                            Register
+                        </button>
+                    </form>
+                <% } %>                
             </div>
         </div>
         <% } else if(role=="teacher" || role=="admin") {%>
@@ -591,7 +593,13 @@
                     </span>
                     &nbsp;&nbsp;
                     <div class="justify-content-start text-center">
-                        <h3 style="margin-top: 7px;"> : 0</h3>
+                        <h3 style="margin-top: 7px;"> : 
+                            <% if(Array.isArray(eventdetails.reg_users)){%>                        
+                                <%= eventdetails.reg_users.length %>                                    
+                            <% }else{%>
+                                1
+                            <% } %>
+                        </h3>
                     </div>
                 </div>
             </div>
