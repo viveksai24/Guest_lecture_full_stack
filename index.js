@@ -445,7 +445,7 @@ app.post('/added_event',function(req,res){
     console.log(req.body.department);
     // const startDateTime = new Date(req.body.dateTime[0]);
     // const endDateTime = new Date(req.body.dateTime[1]);    
-	pool.query('INSERT INTO event_details SET ?', {faculty: sessionstorage.getItem('name'),Event_name:req.body.event,descp:req.body.eDescription, guestname:req.body.gName,linkedIN:'hello',guestmail:req.body.gMail,guestnum:req.body.gPhone,mode:req.body.inlineRadioOptions,platform:req.body.platform,sdt:req.body.dateTime[0],edt:req.body.dateTime[1]}, (err,result,feilds) => {
+	pool.query('INSERT INTO event_details SET ?', {faculty: req.body.faculty,Event_name:req.body.event,descp:req.body.eDescription, guestname:req.body.gName,linkedIN:'hello',guestmail:req.body.gMail,guestnum:req.body.gPhone,mode:req.body.inlineRadioOptions,platform:req.body.platform,sdt:req.body.dateTime[0],edt:req.body.dateTime[1]}, (err,result,feilds) => {
         if(err){
             console.log(err)
         }else{
