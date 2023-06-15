@@ -109,6 +109,35 @@
     </script>
 <% } %>
 
+<% if (feedbackAlert) { %>
+    <div class="alert alert-primary justify-content-center" role="alert">
+        <div class="d-flex flex-column mb-3">
+            <div class="p-2 justify-content-center text-center">    
+                <span class="material-symbols-outlined justify-content-center" style="font-size: 75px;">
+                    communication
+                </span>
+        </div>
+        </div>
+        <div class="text-center">
+            Your feedback is valuable, thank you.
+        </div>
+    </div>
+
+    <script>
+        window.setTimeout(function() {
+            var alertElement = document.querySelectorAll('.alert')[0];
+            alertElement.style.transition = 'opacity 0.5s linear';
+            alertElement.style.opacity = '0';
+            setTimeout(function() {
+                alertElement.style.transition = 'height 0.5s ease-in-out';
+                alertElement.style.height = '0';
+                setTimeout(function() {
+                    alertElement.parentNode.removeChild(alertElement);
+                }, 1000);
+            }, 1000);
+        }, 2000);
+    </script>
+<% } %>
 <br>
 
 <div style="border-bottom: 10px;">
@@ -141,6 +170,9 @@
 <% upcoming_events.sort(function(a,b){return new Date(a.sdt) - new Date(b.sdt)}) %>
 <% past_events.sort(function(a,b){return new Date(b.sdt) - new Date(a.sdt)}) %>
 
+<% var ongoing = ongoing_events.length %>
+<% var upcoming = upcoming_events.length %>
+<% var past = past_events.length %>
 <!-- vivek  -->
 <!-- .toLocaleString("en-GB", {timeZone: "Asia/Kolkata"}) -->
 <% for(var i=0; i<ongoing_events.length; i++){ %>
@@ -175,7 +207,7 @@
                 <% newUpcoming=false}%>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <%- include('event_details',{eventdetails:upcoming_events[i],i:i,role:role,register:true,feedback:false}) %>
+                        <%- include('event_details',{eventdetails:upcoming_events[i],i:(i+ongoing),role:role,register:true,feedback:false}) %>
                     </li>
                 </ul>
             </div>
@@ -198,7 +230,7 @@
             <% newPast=false}%>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <%- include('event_details',{eventdetails:past_events[i],i:i,role:role,register:false,feedback:false}) %>
+                    <%- include('event_details',{eventdetails:past_events[i],i:(i+ongoing+upcoming),role:role,register:false,feedback:false}) %>
                     
                 </li>
             </ul>

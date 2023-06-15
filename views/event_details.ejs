@@ -155,6 +155,14 @@
                                 data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                 Update
                             </button>
+                            <form action="/view_feedback" method="post">
+                                <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
+                                <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
+                                <button class="btn btn-primary" type="submit">
+                                    View Feedback
+                                </button>
+                            </form>
+                            
                             <% } else if(role=="student" && feedback==true) {%>
                                 <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>4"
                                     data-mdb-toggle="modal" data-mdb-dismiss="modal">
@@ -165,10 +173,12 @@
                                 data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                 Join-Discussion
                             </button>
+              
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Chat box model dialog -->
             <div class="modal fade" id="exampleModalToggle<%=i%>2" aria-hidden="true"
                 aria-labelledby="exampleModalToggleLabel<%=i%>2" tabindex="-1">
@@ -201,10 +211,8 @@
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <!-- <span class="material-icons-outlined rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60" style="font-size: 50px;">account_circle</span>                                                     -->
-        
-                                                    <!-- <img src="https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
-                                                        alt="avatar" class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60"> -->
+                                                    <img src="https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
+                                                        alt="avatar" class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
                                                 </li>
                                                 <li class="d-flex justify-content-between mb-4">
                                                     <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
@@ -268,34 +276,36 @@
                                     </p>
                                 </div>
                                 <hr>
-                                <form class="px-4" action="">
+                                <form class="px-4" action="/feedback" method="post">
+                                    <input type="hidden" name="event_id" value="<%= eventdetails.EventID %>" >
+                                    
                                     <p class="text-center"><strong>Your rating:</strong></p>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example1" />
+                                        <input class="form-check-input" type="radio" name="radio_option" value="option1" id="radio3Example1" />
                                         <label class="form-check-label" for="radio3Example1">
                                             Very good
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example2" />
+                                        <input class="form-check-input" type="radio" name="radio_option" value="option2" id="radio3Example2" />
                                         <label class="form-check-label" for="radio3Example2">
                                             Good
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example3" />
+                                        <input class="form-check-input" type="radio" name="radio_option" value="option3" id="radio3Example3" />
                                         <label class="form-check-label" for="radio3Example3">
                                             Medicore
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example4" />
+                                        <input class="form-check-input" type="radio" name="radio_option" value="option4" id="radio3Example4" />
                                         <label class="form-check-label" for="radio3Example4">
                                             Bad
                                         </label>
                                     </div>
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="radio" name="exampleForm" id="radio3Example5" />
+                                        <input class="form-check-input" type="radio" name="radio_option" value="option5" id="radio3Example5" />
                                         <label class="form-check-label" for="radio3Example5">
                                             Very bad
                                         </label>
@@ -305,13 +315,14 @@
                         
                                     <!-- Message input -->
                                     <div class="form-outline mb-4">
-                                    <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                                    <textarea class="form-control" id="form4Example3" name="comments" rows="4"></textarea>
                                     <label class="form-label" for="form4Example3">Your feedback</label>
                                     </div>
-                                </form>
+                                
                                 <div class="card-footer text-end">
-                                    <button type="button" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
+                            </form>
                             </div>
                         </div>
                         <!-- <div class="modal-footer">
@@ -348,7 +359,8 @@
                                                                 <i class="material-icons">highlight_off</i>
                                                             </div> -->
         
-                                                            <form class="mx-1 mx-md-4" action="/added_event" method="post">
+                                                            <form class="mx-1 mx-md-4" action="/update_event" method="post">
+                                                                <input type="hidden" name="event_id" value="<%= eventdetails.EventID %>" >
                                                                 <div class="d-flex flex-row align-items-center mb-4">
                                                                     <span class="material-symbols-outlined">title</span>
                                                                     &nbsp;&nbsp;
@@ -402,6 +414,15 @@
                                                                             class="form-control active" value="<%= eventdetails.guestnum %>"/>
                                                                         <label class="form-label" for="form3Example5c">Guest
                                                                             Phone</label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="d-flex flex-row align-items-center mb-4">
+                                                                    <span class="material-symbols-outlined">supervisor_account</span>
+                                                                    &nbsp;&nbsp;
+                                                                    <div class="form-outline flex-fill mb-0">
+                                                                        <input type="text" id="form3Example3c" name="faculty" class="form-control active" value="<%= eventdetails.faculty %>"/>
+                                                                        <label class="form-label" for="form3Example3c">Coordinator</label>
                                                                     </div>
                                                                 </div>
         
@@ -497,8 +518,8 @@
                                                                         <!-- <br> -->
                                                                         <select id="form3Example8c"
                                                                             class="form-control selectpicker" name="department"
-                                                                            multiple data-live-search="true">
-                                                                            <option selected disabled>Select Department</option>
+                                                                            multiple data-live-search="true" required>
+                                                                            <option disabled>Select Department</option>
                                                                             <option value="cse">Computer Science and Engineering
                                                                             </option>
                                                                             <option value="mee">Mechanical Engineering</option>

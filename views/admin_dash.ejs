@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="/stylesheets/about_style.css" type="text/css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="/test.css"> -->
-
+    
     <!-- dashboards -->
     <!-- bundle -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -71,11 +71,10 @@
             border-radius: 100px / 50px;
         }
     </style>
+
   </head>
 
 <%- include('header',{name:name}); -%>
-
-
 <br>
 <br>
 <div class="container w-75 p-5 justify-content-center">
@@ -111,12 +110,12 @@
                                                             <i class="material-icons">highlight_off</i>
                                                         </div> -->
                     
-                                                        <form class="mx-1 mx-md-4" action="/added_event" method="post" >
+                                                        <form class="mx-1 mx-md-4" action="/added_event" onsubmit="return checkForm()" method="post" >
                                                             <div class="d-flex flex-row align-items-center mb-4">
                                                                 <span class="material-symbols-outlined">title</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="text" name="event" id="form3Example1c" class="form-control" required/>
+                                                                    <input type="text" name="event" id="form3Example1c" required class="form-control"/>
                                                                     <label class="form-label" for="form3Example1c">Event Name</label>
                                                                 </div>
                                                             </div>
@@ -125,7 +124,7 @@
                                                                 <span class="material-symbols-outlined">description</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <textarea id="form3Example2c" class="form-control" name="eDescription" rows="1" required></textarea>
+                                                                    <textarea id="form3Example2c" class="form-control" name="eDescription" required rows="1"></textarea>
                                                                     <!-- <input type="text" id="form3Example1c"  class="form-control" /> -->
                                                                     <label class="form-label" for="form3Example2c">Description</label>
                                                                 </div>
@@ -135,7 +134,7 @@
                                                                 <span class="material-symbols-outlined">person</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="text" id="form3Example3c" name="gName" class="form-control" required/>
+                                                                    <input type="text" id="form3Example3c" name="gName" required class="form-control"/>
                                                                     <label class="form-label" for="form3Example3c">Guest Name</label>
                                                                 </div>
                                                             </div>
@@ -144,7 +143,7 @@
                                                                 <span class="material-symbols-outlined">mail</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="email" id="form3Example4c" name="gMail" class="form-control" required/>
+                                                                    <input type="email" id="form3Example4c" name="gMail" required class="form-control"/>
                                                                     <label class="form-label" for="form3Example4c">Guest Email</label>
                                                                 </div>
                                                             </div>
@@ -153,7 +152,7 @@
                                                                 <span class="material-symbols-outlined">call</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="tel" id="form3Example5c" name="gPhone" class="form-control" required/>
+                                                                    <input type="tel" id="form3Example5c" name="gPhone" required class="form-control"/>
                                                                     <label class="form-label" for="form3Example5c">Guest Phone</label>
                                                                 </div>
                                                             </div>
@@ -162,7 +161,7 @@
                                                                 <span class="material-symbols-outlined">supervisor_account</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="text" id="form3Example3c" name="faculty" class="form-control" required/>
+                                                                    <input type="text" id="form3Example3c" name="faculty" required class="form-control"/>
                                                                     <label class="form-label" for="form3Example3c">Coordinator</label>
                                                                 </div>
                                                             </div>
@@ -171,11 +170,11 @@
                                                                 <span class="material-symbols-outlined">groups</span>  
                                                                 &nbsp;&nbsp;                                                     
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" required/>
+                                                                    <input class="form-check-input" type="radio" required name="inlineRadioOptions" id="inlineRadio1" value="option1"/>
                                                                     <label class="form-check-label" for="inlineRadio1">Online</label>
                                                                 </div>                                                            
                                                                 <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" required/>
+                                                                    <input class="form-check-input" type="radio" required name="inlineRadioOptions" id="inlineRadio2" value="option2"/>
                                                                     <label class="form-check-label" for="inlineRadio2">Offline</label>
                                                                 </div>
                                                             </div>
@@ -184,7 +183,7 @@
                                                                 <span class="material-symbols-outlined">location_on</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="" id="form3Example6c" name="platform" class="form-control" required/>
+                                                                    <input type="" id="form3Example6c" name="platform" required class="form-control"/>
                                                                     <label class="form-label" for="form3Example6c">Platform</label>
                                                                 </div>
                                                             </div>  
@@ -194,7 +193,7 @@
                                                                 <span class="material-symbols-outlined">today</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control" required/>
+                                                                    <input type="datetime-local" name="dateTime" id="start_date_input" required class="form-control"/>
                                                                     <!-- <label class="form-label" for="form3Example7c">Date</label> -->
                                                                 </div>                                                            
                                                             </div>
@@ -218,7 +217,7 @@
                                                                 <span class="material-symbols-outlined">event</span>
                                                                 &nbsp;&nbsp;
                                                                 <div class="form-outline flex-fill mb-0">
-                                                                    <input type="datetime-local" name="dateTime" id="form3Example7c" class="form-control" required/>
+                                                                    <input type="datetime-local" name="dateTime" required id="end_date_input" class="form-control"/>
                                                                     <!-- <label class="form-label" for="form3Example7c">Date</label> -->
                                                                 </div>                                                            
                                                             </div>
@@ -232,7 +231,7 @@
 
                                                                     <!-- <br> -->
                                                                     <select id="form3Example8c" class="form-control selectpicker" required name="department" multiple data-live-search="true">
-                                                                        <!-- <option selected disabled>Select Department</option> -->
+                                                                        <option disabled>Select Department</option>
                                                                         <option value="cse">Computer Science and Engineering</option>
                                                                         <option value="mee">Mechanical Engineering</option>
                                                                         <option value="ece">Electronics and Communication Engineering</option>
@@ -249,6 +248,70 @@
                                                             </div>  
                                                             
                                                         </form>
+
+                                                        <script>
+                                                            const myList = JSON.parse('<%- JSON.stringify(eventdetails) %>');
+                                                            function checkForm(){
+                                                                var start_date = new Date(document.getElementById("start_date_input").value).getTime();
+                                                                var end_date = new Date(document.getElementById("end_date_input").value).getTime();
+                                                                var now = new Date().getTime();
+                                                                // var department = document.getElementById("form3Example8c");
+                                                                // var department_array=Array.from(department.department_array);
+                                                                // alert(department_array);
+                                                                var selectElement = document.getElementById("form3Example8c");
+
+                                                                // Get an array of selected options
+                                                                var selectedOptions = Array.from(selectElement.selectedOptions);
+
+                                                                // Get an array of selected option values
+                                                                var department = selectedOptions.map(option => option.value);
+                                                                alert("Selected options: " + department.length);
+
+                                                                if(start_date > end_date){
+                                                                    alert("Starting date and time cannot be greater than ending date and time");
+                                                                    return false;
+                                                                }else if(start_date < now){
+                                                                    alert("Starting date and time cannot be less than current date and time");
+                                                                    return false;
+                                                                }else if(end_date < now){
+                                                                    alert("Ending date and time cannot be less than current date and time");
+                                                                    return false;
+                                                                }else{
+                                                                    for(var i =0;i<myList.length;i++){
+                                                                        var event_start_date = new Date(myList[i].sdt).getTime();
+                                                                        var event_end_date = new Date(myList[i].edt).getTime();
+                                                                        var event_department = myList[i].dept;
+                                                                        var reserved_deapartment = "";
+                                                                        
+                                                                        if((start_date >= event_start_date && start_date <= event_end_date && end_date >= event_start_date && end_date <= event_end_date) || 
+                                                                        (start_date <= event_start_date && end_date >= event_start_date && end_date <= event_end_date) ||
+                                                                        (start_date >= event_start_date && start_date <= event_end_date && end_date >= event_end_date) ||
+                                                                        (start_date <= event_start_date && end_date >= event_end_date)){
+                                                                            for(var j=0;j<department.length;j++){
+                                                                                for(var k=0;k<event_department.length;k++){
+                                                                                    if(department[j] == event_department[k]){
+                                                                                        reserved_deapartment+=(department[j]);
+                                                                                        reserved_deapartment+=(", ");
+                                                                                    }
+                                                                                }                                                                        
+                                                                            }
+                                                                            if (reserved_deapartment.length > 0){
+                                                                                alert(reserved_deapartment + ",these departments already exists in this time slot");
+                                                                                return false;
+                                                                            }                                                                                
+                                                                        }else{
+                                                                            return true;
+                                                                        }
+                                                                    }
+                                                                    // alert(myList[0].faculty);
+                                                                    // return false;
+                                                                }
+                                                                // check the department slot also free or not in the database
+                                                                
+                                                            }
+                                                        </script>
+
+
                                                     </div>
                                                     <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                                                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" class="img-fluid" alt="Sample image">
@@ -266,6 +329,35 @@
         </div>
     </div>   
     <br>
+    <% if (isUpdated) { %>
+        <div class="alert alert-success justify-content-center" role="alert">
+            <div class="d-flex flex-column mb-3">
+                <div class="p-2 justify-content-center text-center">    <span class="material-symbols-outlined justify-content-center" style="font-size: 75px;">
+                    check_circle
+                </span>
+            </div>
+            </div>
+            <div class="text-center">
+                <strong>Success!</strong> Event Updated successfully!
+            </div>
+        </div>
+    
+        <script>
+            window.setTimeout(function() {
+                var alertElement = document.querySelectorAll('.alert')[0];
+                alertElement.style.transition = 'opacity 0.5s linear';
+                alertElement.style.opacity = '0';
+                setTimeout(function() {
+                    alertElement.style.transition = 'height 0.5s ease-in-out';
+                    alertElement.style.height = '0';
+                    setTimeout(function() {
+                        alertElement.parentNode.removeChild(alertElement);
+                    }, 1000);
+                }, 1000);
+            }, 2000);
+        </script>
+    <% } %>
+
     <% if (isAdded) { %>
         <div class="alert alert-success justify-content-center" role="alert">
             <div class="d-flex flex-column mb-3">
@@ -294,6 +386,8 @@
             }, 2000);
         </script>
     <% } %>
+
+    
 
     <br>
     <div style="border-bottom: 10px;">
@@ -395,6 +489,30 @@
     <% } %>
     <hr>
 </div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+<script>
+    $(document).ready(function() {
+        var ctx = $("#chart-line");
+        var myLineChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ["Spring", "Summer", "Fall", "Winter"],
+                datasets: [{
+                    data: [1200, 1700, 800, 200],
+                    backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Weather'
+                }
+            }
+        });
+    });
+</script>
+<script src="https://unpkg.com/@adminkit/core@latest/dist/js/app.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
 <%- include('footer'); -%>
 </body>
