@@ -163,16 +163,20 @@
                                 </button>
                             </form>
                             
-                            <% } else if(role=="student" && feedback==true) {%>
+                            <% } else if(role=="student" && feedback==true && eventdetails.isRegistered==true) {%>
                                 <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>4"
                                     data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                     Feedback
                                 </button>
                             <% } %>
-                            <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>2"
-                                data-mdb-toggle="modal" data-mdb-dismiss="modal">
-                                Join-Discussion
-                            </button>
+                            <form action="/chat_box" method="post">
+                                <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
+                                <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
+                                <button type="submit" class="btn btn-primary">
+                                    Join-Discussion
+                                </button>
+                            </form>
+                            
               
                         </div>
                     </div>
@@ -190,7 +194,87 @@
                             </h5>
                             <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body" style="position: relative; overflow-y:scroll; height:400px;">
+                                
+                                <ul class="list-unstyled" id="chat">
+                                    <li class="d-flex justify-content-end mb-4">
+                                        <div class="card w-75">
+                                            <div class="card-header d-flex justify-content-between p-3">
+                                                <p class="fw-bold mb-0">Lara Croft</p>                                                            
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="mb-0">
+                                                    #message
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <img src="https://media.istockphoto.com/id/1332100919/vector/man-icon-black-icon-person-symbol.jpg?s=612x612&w=0&k=20&c=AVVJkvxQQCuBhawHrUhDRTCeNQ3Jgt0K1tXjJsFy1eg="
+                                            alt="avatar" class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong" width="60">
+                                    </li>
+                                    <li class="d-flex mb-4">
+                                        <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
+                                            alt="avatar"
+                                            class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                            width="60">
+                                        <div class="card w-75">
+                                            <div class="card-header d-flex p-3">
+                                                <p class="fw-bold mb-0">Brad Pitt</p>                                                            
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="mb-0">
+                                                    #message
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4">
+                                        <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
+                                            alt="avatar"
+                                            class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                            width="60">
+                                        <div class="card w-75">
+                                            <div class="card-header d-flex p-3">
+                                                <p class="fw-bold mb-0">Brad Pitt</p>                                                            
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="mb-0">
+                                                    #message
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex mb-4">
+                                        <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
+                                            alt="avatar"
+                                            class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                            width="60">
+                                        <div class="card w-75">
+                                            <div class="card-header d-flex p-3">
+                                                <p class="fw-bold mb-0">Brad Pitt</p>                                                            
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="mb-0">
+                                                    #message
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>   
+                            </div>
+                            <div class="card-footer align-items-center bg-white mb-3">
+                                <div class="form-outline">
+                                    <form id="messageForm" method="post" action="" style="width:100%;">
+                                        <label class="form-label" for="message">Message</label>
+                                        <div class="status" style="color: red;"></div>
+                                        <input type="hidden" name="event_id" value="<% eventdetails.EventID %>">
+                                        <input type="hidden" name="event_id" value="<% eventdetails.EventID %>">
+                                        <input type="text" class="mytext form-control" style="width:100%;" id="message">
+                                    </form> 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="modal-body">
                             <section style="background-color: white;" class="">
                                 <div class="container py-5">
                                     <div class="row d-flex justify-content-center">
@@ -234,6 +318,26 @@
                                                         </div>
                                                     </div>
                                                 </li>
+                                                <li class="d-flex justify-content-between mb-4">
+                                                    <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-group-icon-png-image_1796653.jpg"
+                                                        alt="avatar"
+                                                        class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
+                                                        width="60">
+                                                    <div class="card">
+                                                        <div class="card-header d-flex justify-content-between p-3">
+                                                            <p class="fw-bold mb-0">Brad Pitt</p>
+                                                            <p class="text-muted small mb-0"><i class="far fa-clock"></i> 10
+                                                                mins ago</p>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <p class="mb-0">
+                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                                                eiusmod tempor
+                                                                incididunt ut labore et dolore magna aliqua.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li class="bg-white mb-3">
                                                     <div class="form-outline">
                                                         <textarea class="form-control" id="textAreaExample2"
@@ -247,7 +351,7 @@
                                     </div>
                                 </div>
                             </section>
-                        </div>
+                        </div> -->
                         <!-- <div class="modal-footer">
                             <button class="btn btn-primary" data-mdb-target="#exampleModalToggle1" data-mdb-toggle="modal">
                                 Back Event Details
@@ -472,6 +576,18 @@
                                                                             for="form3Example6c">Platform</label>
                                                                     </div>
                                                                 </div>
+
+                                                                <% if (eventdetails.mode=="option1") { %>
+                                                                    <div class="d-flex flex-row align-items-center mb-4">
+                                                                        <span class="material-symbols-outlined">link</span>
+                                                                        &nbsp;&nbsp;
+                                                                        <div class="form-outline flex-fill mb-0">
+                                                                            <input type="text" id="form3Example13c" name="link" class="form-control active"/>
+                                                                            <label class="form-label" for="form3Example13c">Class Link</label>
+                                                                        </div>
+                                                                    </div>                                                                 
+                                                                <% } %>
+
                                                                 <% const update_sdt = eventdetails.sdt %>
                                                                 <% update_sdt.setHours(update_sdt.getHours() + 5) %>
                                                                 <% update_sdt.setMinutes(update_sdt.getMinutes() + 30) %>
@@ -593,7 +709,7 @@
             <% } %>
             </h5>
         </div>
-        <% if (role=="student" && register==true) { %>
+        <% if (role=="student" && register==true && eventdetails.dept.includes(user_dept)) { %>
         <div class="col-sm-3 p-3">
             <div class="d-flex justify-content-end p-3 my-3">
                 <% if (!eventdetails.isRegistered) { %>

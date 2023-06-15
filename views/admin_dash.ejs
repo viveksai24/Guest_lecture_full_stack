@@ -265,7 +265,7 @@
 
                                                                 // Get an array of selected option values
                                                                 var department = selectedOptions.map(option => option.value);
-                                                                alert("Selected options: " + department.length);
+                                                                // alert("Selected options: " + department.length);
 
                                                                 if(start_date > end_date){
                                                                     alert("Starting date and time cannot be greater than ending date and time");
@@ -299,14 +299,12 @@
                                                                                 alert(reserved_deapartment + ",these departments already exists in this time slot");
                                                                                 return false;
                                                                             }                                                                                
-                                                                        }else{
-                                                                            return true;
                                                                         }
                                                                     }
                                                                     // alert(myList[0].faculty);
-                                                                    // return false;
                                                                 }
                                                                 // check the department slot also free or not in the database
+                                                                return true;
                                                                 
                                                             }
                                                         </script>

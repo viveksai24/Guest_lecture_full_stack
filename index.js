@@ -42,6 +42,7 @@ app.get('/stuDash',async(req,res)=>{
     var name = sessionstorage.getItem('name');
     var username = sessionstorage.getItem('username');
     var role = sessionstorage.getItem('role');
+    var dept = sessionstorage.getItem('dept');
     const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
     var final = [];
     var depts;
@@ -77,7 +78,8 @@ app.get('/stuDash',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });
                 
             }
@@ -109,7 +111,7 @@ app.get('/stuDash',async(req,res)=>{
             final[i]['isRegistered'] = false;
         }
     }
-    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false,feedbackAlert: false});
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false,feedbackAlert: false,user_dept:dept});
 });
 
 //this method is for alert box which says registered successfully in student dash.
@@ -117,6 +119,7 @@ app.get('/stuDash1',async(req,res)=>{
     var name = sessionstorage.getItem('name');
     var username = sessionstorage.getItem('username');
     var role = sessionstorage.getItem('role');
+    var dept = sessionstorage.getItem('dept');
     const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
     var final = [];
     var depts;
@@ -152,7 +155,8 @@ app.get('/stuDash1',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });
                 
             }
@@ -184,7 +188,7 @@ app.get('/stuDash1',async(req,res)=>{
             final[i]['isRegistered'] = false;
         }
     }
-    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: true,feedbackAlert: false});
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: true,feedbackAlert: false,user_dept:dept});
 });
 
 //for feedback noted successfully student dash
@@ -192,6 +196,7 @@ app.get('/stuDash2',async(req,res)=>{
     var name = sessionstorage.getItem('name');
     var username = sessionstorage.getItem('username');
     var role = sessionstorage.getItem('role');
+    var dept = sessionstorage.getItem('dept');
     const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
     var final = [];
     var depts;
@@ -227,7 +232,8 @@ app.get('/stuDash2',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });
                 
             }
@@ -259,13 +265,14 @@ app.get('/stuDash2',async(req,res)=>{
             final[i]['isRegistered'] = false;
         }
     }
-    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false,feedbackAlert: true});
+    res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false,feedbackAlert: true,user_dept:dept});
 });
 
 app.get('/Dashboard', async (req,res) => {
     var name = sessionstorage.getItem('name');
     var username = sessionstorage.getItem('username');
     var role = sessionstorage.getItem('role');
+    var dept = sessionstorage.getItem('dept');
     const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
     var final = [];
     var depts;
@@ -301,7 +308,8 @@ app.get('/Dashboard', async (req,res) => {
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });
                 
             }
@@ -326,7 +334,7 @@ app.get('/Dashboard', async (req,res) => {
         while(boo) await sleep(10);
     }
     if(role == 'teacher'){   
-        res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now});
+        res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now,user_dept:dept});
     }
     else if (role == 'student'){
         for(var i = 0; i<final.length;i++){
@@ -336,7 +344,7 @@ app.get('/Dashboard', async (req,res) => {
                 final[i]['isRegistered'] = false;
             }
         }
-        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false,feedbackAlert: false});
+        res.render('stu_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now,registerAlert: false,feedbackAlert: false,user_dept:dept});
     }else if(role=='admin'){
         res.render('admin_dash',{username: username, name: name,role:role, eventdetails: final ,currentdate:now, isAdded: false,isUpdated:false});
     }
@@ -355,6 +363,7 @@ app.post('/Dashboard',function(req,res){
         }else{
             sessionstorage.setItem('name',result[0]['Name']);
             sessionstorage.setItem('role',result[0]['Role']);
+            sessionstorage.setItem('dept',result[0]['Dept']);
             res.redirect('/Dashboard');
         }
 	})
@@ -364,6 +373,7 @@ app.get('/teacher_dash',async(req,res)=>{
     var name = sessionstorage.getItem('name');
     var username = sessionstorage.getItem('username');
     var role = sessionstorage.getItem('role');
+    var dept = sessionstorage.getItem('dept');
     const now = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"});
     var final = [];
     var depts;
@@ -399,7 +409,8 @@ app.get('/teacher_dash',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });                
             }
         }
@@ -422,7 +433,7 @@ app.get('/teacher_dash',async(req,res)=>{
         });
         while(boo) await sleep(10);
     }
-    res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now});
+    res.render('teacher_dash',{username: username, name: name,role:role, eventdetails: final, isAdded: false,currentdate:now,user_dept:dept});
 });
 
 app.get('/admin_dash',async(req,res)=>{
@@ -464,7 +475,8 @@ app.get('/admin_dash',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });                
             }
         }
@@ -529,7 +541,8 @@ app.get('/admin_dash1',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });
                 
             }
@@ -598,7 +611,8 @@ app.get('/admin_dash2',async(req,res)=>{
                     platform: result1[i].platform,
                     sdt: result1[i].sdt,
                     edt: result1[i].edt,
-                    dept:depts
+                    dept:depts,
+                    join: result1[i].join_link
                 });
                 
             }
@@ -706,6 +720,41 @@ app.post('/feedback',function(req,res){
 app.post('/update_event',function(req,res){
     console.log(req.body);
     var eventid = req.body.event_id;
+    if (req.body.inlineRadioOptions == 'option1'){
+        pool.query('UPDATE event_details SET faculty=?,Event_name=?,descp=?,guestname=?,linkedIN=?,guestmail=?,guestnum=?,mode=?,platform=?,sdt=?,edt=?,join_link=? where EventID=?',[req.body.faculty,req.body.event,req.body.eDescription,req.body.gName,'hello',req.body.gMail,req.body.gPhone,req.body.inlineRadioOptions,req.body.platform,req.body.dateTime[0],req.body.dateTime[1],req.body.link,eventid],(err,result,feilds)=>{
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result);
+                pool.query('DELETE FROM event_dep where EventID=?',[eventid],(err,result,feilds)=>{
+                    if(err){
+                        console.log(err);
+                    }else{
+                        console.log('deleted');
+                    }
+                });
+                if(Array.isArray(req.body.department)){
+                    for (var i=0; i<req.body.department.length;i++){
+                        pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
+                            if (err){
+                                console.log(err);
+                            }else{
+                                console.log('updated');
+                            }
+                        });
+                    }                
+                }else{
+                    pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department}, (err,result,feilds) => {
+                        if (err){
+                            console.log(err);
+                        }else{
+                            console.log('updated');
+                        }
+                    });
+                } 
+            }
+        })
+}else{
     pool.query('UPDATE event_details SET faculty=?,Event_name=?,descp=?,guestname=?,linkedIN=?,guestmail=?,guestnum=?,mode=?,platform=?,sdt=?,edt=? where EventID=?',[req.body.faculty,req.body.event,req.body.eDescription,req.body.gName,'hello',req.body.gMail,req.body.gPhone,req.body.inlineRadioOptions,req.body.platform,req.body.dateTime[0],req.body.dateTime[1],eventid],(err,result,feilds)=>{
         if(err){
             console.log(err);
@@ -739,6 +788,7 @@ app.post('/update_event',function(req,res){
             } 
         }
     })
+}
     res.redirect('/admin_dash2');
 });
 
@@ -751,11 +801,13 @@ app.get('/home',function(req,res){
 		if(err){
 			console.log(err);
 		}
-        else if (result[0]['role']=='teacher'){
-            res.render('teacher_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'), eventdetails: sessionstoragelist, isAdded: false});
+        else if (result[0]['Role']=='teacher'){
+            res.redirect('/teacher_dash');
         }
-        else{
-            res.render('stu_dash',{username: sessionstorage.getItem('username'),name: sessionstorage.getItem('name'),eventdetails: sessionstoragelist});
+        else if(result[0]['Role']=='student'){
+            res.redirect('/stuDash');
+        }else{
+            res.redirect('/admin_dash');
         }
 	})
 });
@@ -797,6 +849,53 @@ app.post('/view_feedback',async(req,res)=>{
     res.render('view_feedback',{option1:option1,option2:option2,option3:option3,option4:option4,option5:option5,total:total,name:name,final:final,event_name:event_name});
 });
 
+app.get('/chat_box',async(req,res)=>{
+    var eventid = sessionstorage.getItem('session_eventid');
+    var event_name = sessionstorage.getItem('session_event_name');
+    var username = sessionstorage.getItem('username');
+    var name = sessionstorage.getItem('name');
+    var final=[];
+    var bool = true;
+    pool.query('SELECT * FROM messages where EventID=?',[eventid],(err,result,feilds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            
+            console.log('messages retrieved');
+            final=result;
+        }
+        bool = false;
+
+    });
+    while(bool) await sleep(10);
+    res.render('chat',{eventid:eventid,event_name:event_name,username:username,name:name,final:final});
+});
+
+app.post('/post_chats',async(req,res)=>{
+    var username = sessionstorage.getItem('username');
+    var name = sessionstorage.getItem('name');
+    var eventid = sessionstorage.getItem('session_eventid');
+    var event_name = sessionstorage.getItem('session_event_name');
+    var message = req.body.message;
+    var now = new Date();
+    var boo = true;
+    pool.query('INSERT INTO messages SET ?', {EventID: eventid,message:message,username:username,name:name,timestamp:now}, (err,result,feilds) => {
+        if (err){
+            console.log(err);
+        }else{
+            console.log('message saved');
+        }
+        boo = false;
+    });
+    while(boo) await sleep(10);
+    res.redirect('/chat_box');
+});
+
+app.post('/chat_box',async(req,res)=>{
+    sessionstorage.setItem('session_eventid',req.body.eventid);
+    sessionstorage.setItem('session_event_name',req.body.event_name);
+    res.redirect('/chat_box');
+});
 //opening the login_alert page
 app.get('/login_alert',function(req,res){
     res.render('login',{isAlert: true});

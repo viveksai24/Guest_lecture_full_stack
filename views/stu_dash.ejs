@@ -186,7 +186,7 @@
             <% newOngoing=false } %>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <%- include('event_details',{eventdetails:ongoing_events[i],i:i,role:role,register:false,feedback:true}) %>
+                        <%- include('event_details',{eventdetails:ongoing_events[i],i:i,role:role,register:false,feedback:true,user_dept:user_dept}) %>
                         
                     </li>
                 </ul>        
@@ -207,7 +207,7 @@
                 <% newUpcoming=false}%>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <%- include('event_details',{eventdetails:upcoming_events[i],i:(i+ongoing),role:role,register:true,feedback:false}) %>
+                        <%- include('event_details',{eventdetails:upcoming_events[i],i:(i+ongoing),role:role,register:true,feedback:false,user_dept:user_dept}) %>
                     </li>
                 </ul>
             </div>
@@ -230,7 +230,7 @@
             <% newPast=false}%>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <%- include('event_details',{eventdetails:past_events[i],i:(i+ongoing+upcoming),role:role,register:false,feedback:false}) %>
+                    <%- include('event_details',{eventdetails:past_events[i],i:(i+ongoing+upcoming),role:role,register:false,feedback:false,user_dept:user_dept}) %>
                     
                 </li>
             </ul>
