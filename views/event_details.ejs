@@ -155,6 +155,27 @@
                                 data-mdb-toggle="modal" data-mdb-dismiss="modal">
                                 Update
                             </button>
+                            <form action="/delete_event" onsubmit="return confirm('Do you really want to submit the form?');" method="post">
+                                <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
+                                <button class="btn btn-primary">
+                                    Delete Event
+                                </button>
+                            </form>
+                            <script>
+                                function validate(form) {
+                                    if(!valid) {
+                                        alert('Please correct the errors in the form!');
+                                        return false;
+                                    }
+                                    else {
+                                        return confirm('Do you really want to submit the form?');
+                                    }
+                                }
+                            </script>
+                            <form onsubmit="return validate(this);">
+                            </form>
+
+
                             <form action="/view_feedback" method="post">
                                 <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
                                 <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
@@ -163,12 +184,6 @@
                                 </button>
                             </form>
                             
-                            <% } else if(role=="student" && feedback==true && eventdetails.isRegistered==true) {%>
-                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>4"
-                                    data-mdb-toggle="modal" data-mdb-dismiss="modal">
-                                    Feedback
-                                </button>
-                            <% } %>
                             <form action="/chat_box" method="post">
                                 <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
                                 <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
@@ -176,6 +191,41 @@
                                     Join-Discussion
                                 </button>
                             </form>
+                            
+                            <% } else if(role=="student" && feedback==true && eventdetails.isRegistered==true) {%>
+                                <button class="btn btn-primary" data-mdb-target="#exampleModalToggle<%= i %>4"
+                                    data-mdb-toggle="modal" data-mdb-dismiss="modal">
+                                    Feedback
+                                </button>
+
+
+                                <form action="/chat_box" method="post">
+                                    <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
+                                    <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
+                                    <button type="submit" class="btn btn-primary">
+                                        Join-Discussion
+                                    </button>
+                                </form>
+                                 
+                                <% if(eventdetails.mode=='option1'){%>
+                                    <a href="<% eventdetails.join_link %>">
+                                        <button class="btn btn-primary">
+                                            Join
+                                        </button>
+                                    </a>
+                                    <%}%>
+
+                            <% }else if(role=="teacher"){ %>
+
+                            <form action="/chat_box" method="post">
+                                <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
+                                <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>">
+                                <button type="submit" class="btn btn-primary">
+                                    Join-Discussion
+                                </button>
+                            </form>
+                            
+                            <% } %>
                             
               
                         </div>
@@ -582,17 +632,17 @@
                                                                         <span class="material-symbols-outlined">link</span>
                                                                         &nbsp;&nbsp;
                                                                         <div class="form-outline flex-fill mb-0">
-                                                                            <input type="text" id="form3Example13c" name="link" class="form-control active"/>
+                                                                            <input type="text" id="form3Example13c" name="link" class="form-control active" value="<%= eventdetails.join_link  %>"/>
                                                                             <label class="form-label" for="form3Example13c">Class Link</label>
                                                                         </div>
                                                                     </div>                                                                 
                                                                 <% } %>
-
-                                                                <% const update_sdt = eventdetails.sdt %>
+                                    
+                                                                <% var update_sdt = eventdetails.sdt %>
                                                                 <% update_sdt.setHours(update_sdt.getHours() + 5) %>
                                                                 <% update_sdt.setMinutes(update_sdt.getMinutes() + 30) %>
 
-                                                                <% const update_edt = eventdetails.edt %>
+                                                                <% var update_edt = eventdetails.edt %>
                                                                 <% update_edt.setHours(update_edt.getHours() + 5) %>
                                                                 <% update_edt.setMinutes(update_edt.getMinutes() + 30) %>
                                                                 
@@ -602,7 +652,7 @@
                                                                     &nbsp;&nbsp;
                                                                     <div class="form-outline flex-fill mb-0">
                                                                         <input type="datetime-local" name="dateTime"
-                                                                            id="form3Example7c" class="form-control active" value="<%= update_sdt.toISOString().slice(0,16) %>">
+                                                                            id="start_date_update" class="form-control active" value="<%= update_sdt.toISOString().slice(0,16) %>">
                                                                         <!-- <label class="form-label" for="form3Example7c">Date</label> -->
                                                                     </div>
                                                                 </div>
@@ -619,7 +669,7 @@
                                                                     &nbsp;&nbsp;
                                                                     <div class="form-outline flex-fill mb-0">
                                                                         <input type="datetime-local" name="dateTime"
-                                                                            id="form3Example7c" class="form-control active" value="<%= update_edt.toISOString().slice(0,16) %>">
+                                                                            id="end_date_update" class="form-control active" value="<%= update_edt.toISOString().slice(0,16) %>">
                                                                         <!-- <label class="form-label" for="form3Example7c">Date</label> -->
                                                                     </div>
                                                                 </div>
@@ -632,7 +682,7 @@
                                                                         <!-- <label class="form-label" for="form3Example8c">Select Department</label> -->
         
                                                                         <!-- <br> -->
-                                                                        <select id="form3Example8c"
+                                                                        <select id="input_depts"
                                                                             class="form-control selectpicker" name="department"
                                                                             multiple data-live-search="true" required>
                                                                             <option disabled>Select Department</option>
@@ -658,6 +708,77 @@
                                                                 </div>
         
                                                             </form>
+
+                                                            <script>
+                                                                const bottle = JSON.parse('<%- JSON.stringify(eventdetails) %>');
+                                                                setTimeout(() => {
+                                                                    function check(){
+                                                                    var start_date_doop = new Date(document.getElementById("start_date_update").value);
+                                                                    // start_date_doop.setHours(start_date_doop.getHours() - 5)
+                                                                    // start_date_doop.setMinutes(start_date_doop.getMinutes() - 30)
+                                                                    var start_date = start_date_doop.getTime();
+                                                                    var end_date_doop = new Date(document.getElementById("end_date_update").value);
+                                                                    // end_date_doop.setHours(end_date_doop.getHours() - 5)
+                                                                    // end_date_doop.setMinutes(end_date_doop.getMinutes() - 30)
+                                                                    var end_date = end_date_doop.getTime();
+                                                                    var now = new Date().getTime();
+                                                                    alert(new Date()+" "+start_date_doop.toLocaleString("en-GB",{timeZone: "Asia/Kolkata" }));
+                                                                    // var department = document.getElementById("form3Example8c");
+                                                                    // var department_array=Array.from(department.department_array);
+                                                                    // alert(department_array);
+                                                                    var selectElement = document.getElementById("input_depts");
+    
+                                                                    // Get an array of selected options
+                                                                    var selectedOptions = Array.from(selectElement.selectedOptions);
+    
+                                                                    // Get an array of selected option values
+                                                                    var department = selectedOptions.map(option => option.value);
+                                                                    // alert("Selected options: " + department.length);
+    
+                                                                    if(start_date > end_date){
+                                                                        alert("Starting date and time cannot be greater than ending date and time");
+                                                                        return false;
+                                                                    }else if(start_date < now){
+                                                                        alert("Starting date and time cannot be less than current date and time");
+                                                                        return false;
+                                                                    }else if(end_date < now){
+                                                                        alert("Ending date and time cannot be less than current date and time");
+                                                                        return false;
+                                                                    }else{
+                                                                        for(var i =0;i<bottle.length;i++){
+                                                                            var event_start_date = new Date(bottle[i].sdt).getTime();
+                                                                            var event_end_date = new Date(bottle[i].edt).getTime();
+                                                                            var event_department = bottle[i].dept;
+                                                                            var reserved_deapartment = "";
+                                                                            
+                                                                            if((start_date >= event_start_date && start_date <= event_end_date && end_date >= event_start_date && end_date <= event_end_date) || 
+                                                                            (start_date <= event_start_date && end_date >= event_start_date && end_date <= event_end_date) ||
+                                                                            (start_date >= event_start_date && start_date <= event_end_date && end_date >= event_end_date) ||
+                                                                            (start_date <= event_start_date && end_date >= event_end_date)){
+                                                                                for(var j=0;j<department.length;j++){
+                                                                                    for(var k=0;k<event_department.length;k++){
+                                                                                        if(department[j] == event_department[k]){
+                                                                                            reserved_deapartment+=(department[j]);
+                                                                                            reserved_deapartment+=(", ");
+                                                                                        }
+                                                                                    }                                                                        
+                                                                                }
+                                                                                if (reserved_deapartment.length > 0){
+                                                                                    alert(reserved_deapartment + ",these departments already exists in this time slot");
+                                                                                    return false;
+                                                                                }                                                                                
+                                                                            }
+                                                                        }
+                                                                        // alert(myList[0].faculty);
+                                                                    }
+                                                                    // check the department slot also free or not in the database
+                                                                    return true;
+                                                                    
+                                                                }
+                                                                }, 1000);
+                                                                
+                                                            </script>
+
                                                         </div>
                                                         <div
                                                             class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
@@ -725,9 +846,15 @@
         <% } else if(role=="teacher" || role=="admin") {%>
             <div class="col-sm-4 p-4">
                 <div class="d-flex justify-content-end p-3 my-3">
-                    <span class="material-symbols-outlined fa-3x" data-mdb-toggle="tooltip" title="Click to view details.">
-                        groups
-                    </span>
+                    <form action="/register_view" method="post">
+                        <input type="hidden" name="eventid" value="<%= eventdetails.EventID %>" >
+                        <input type="hidden" name="event_name" value="<%= eventdetails.Event_name %>" >
+                        <button type="submit" class="" style="border: 0; background:white;">
+                            <span class="material-symbols-outlined fa-3x" data-mdb-toggle="tooltip" title="Click to view details.">
+                                groups
+                            </span>
+                        </button>
+                    </form>                    
                     &nbsp;&nbsp;
                     <div class="justify-content-start text-center">
                         <h3 style="margin-top: 7px;"> : 

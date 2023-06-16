@@ -71,101 +71,29 @@
 <br>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-<script>
-    $(document).ready(function() {
-        var ctx = $("#chart-line");
-        var myLineChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ["Very Good", "Good", "Medicore", "Bad","Very bad"],
-                datasets: [{
-                    data: [
-                        '<%= option1 %>',
-                        '<%= option2 %>',
-                        '<%= option3 %>',
-                        '<%= option4 %>',
-                        '<%= option5 %>'
-                    ],
-                    backgroundColor: ["rgba(100, 255, 0, 0.5)",  "rgba(0, 100, 255, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(242, 150, 2, 0.5)", "rgba(255, 0, 0, 0.5)"]
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: 'Feedback'
-                }
-            }
-        });
-    });
-</script>
-<div class="page-content page-container" id="page-content">
-    <div class="padding">
-        <div class="row">
-            <div class="container-fluid d-flex justify-content-center">
-                <div class="col-sm-8 col-md-6">
-                    <div class="card">
-                        <div class="card-header"><%= event_name %></div>
-                        <div class="card-body" style="height: 420px">
-                            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-                                </div>
-                                <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-                                    <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-                                </div>
-                            </div> <canvas id="chart-line" width="299" height="200" class="chartjs-render-monitor" style="display: block; width: 299px; height: 200px;"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<br>
-<br>
+
 <div class="container w-75 p-5 justify-content-center">
+    <div style="border-bottom: 10px;">
+        <h2><%= event_name %></h2>
+    </div>  
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">S.No.</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Comments</th>
+            <th scope="col">S. No.</th>
+            <th scope="col">Username</th>
+            <th scope="col">Name</th>
+            <th scope="col">Department</th>
           </tr>
         </thead>
         <tbody>
             <% for(var i=0;i<final.length;i++){ %>
-                <% if (final[i].options=="option1") { %>
-                    <tr class="table-success">
-                        <th scope="row"><%= i+1 %></th>
-                        <td>Very Good</td>
-                        <td><%= final[i].comments %></td>
-                    </tr>
-                <% }else if(final[i].options=="option2"){ %>
-                    <tr class="table-primary">
-                        <th scope="row"><%= i+1 %></th>
-                        <td>Good</td>
-                        <td><%= final[i].comments %></td>
-                    </tr>
-                <% }else if(final[i].options=="option3"){ %>
-                    <tr class="table-secondary">
-                        <th scope="row"><%= i+1 %></th>
-                        <td>Medicore</td>
-                        <td><%= final[i].comments %></td>
-                    </tr>
-                <% }else if(final[i].options=="option4"){ %>
-                    <tr class="table-warning">
-                        <th scope="row"><%= i+1 %></th>
-                        <td>Bad</td>
-                        <td><%= final[i].comments %></td>
-                    </tr>
-                <% }else{ %>
-                    <tr class="table-danger">
-                        <th scope="row"><%= i+1 %></th>
-                        <td>Very Bad</td>
-                        <td><%= final[i].comments %></td>
-                    </tr>
-                <% } %>
-            <% } %>
+                <tr>
+                    <th scope="row"><%= i+1 %></th>
+                    <td><%= final[i].username %></td>
+                    <td><%= final[i].name %></td>
+                    <td><%= final[i].dept.toUpperCase() %></td>
+                </tr>
+            <% } %>             
         </tbody>
       </table>
 </div>

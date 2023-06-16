@@ -692,7 +692,8 @@ app.post('/added_event',function(req,res){
 app.post('/register',function(req,res){
     var eventid = req.body.event_id;
     var username = sessionstorage.getItem('username');
-    pool.query('INSERT INTO register SET ?', {EventID: eventid,username:username}, (err,result,feilds) => {
+    var name = sessionstorage.getItem('name');
+    pool.query('INSERT INTO register SET ?', {EventID: eventid,username:username,name:name}, (err,result,feilds) => {
         if (err){
             console.log(err);
         }else{
@@ -717,77 +718,105 @@ app.post('/feedback',function(req,res){
 });
 
 //update function in admin dash
-app.post('/update_event',function(req,res){
+app.post('/update_event',async(req,res)=>{
     console.log(req.body);
     var eventid = req.body.event_id;
     if (req.body.inlineRadioOptions == 'option1'){
-        pool.query('UPDATE event_details SET faculty=?,Event_name=?,descp=?,guestname=?,linkedIN=?,guestmail=?,guestnum=?,mode=?,platform=?,sdt=?,edt=?,join_link=? where EventID=?',[req.body.faculty,req.body.event,req.body.eDescription,req.body.gName,'hello',req.body.gMail,req.body.gPhone,req.body.inlineRadioOptions,req.body.platform,req.body.dateTime[0],req.body.dateTime[1],req.body.link,eventid],(err,result,feilds)=>{
+        var booo=true;
+        pool.query('UPDATE event_details SET faculty=?,Event_name=?,descp=?,guestname=?,linkedIN=?,guestmail=?,guestnum=?,mode=?,platform=?,sdt=?,edt=?,join_link=? where EventID=?',[req.body.faculty,req.body.event,req.body.eDescription,req.body.gName,'hello',req.body.gMail,req.body.gPhone,req.body.inlineRadioOptions,req.body.platform,req.body.dateTime[0],req.body.dateTime[1],req.body.link,eventid],async(err,result,feilds)=>{
             if(err){
                 console.log(err);
             }else{
                 console.log(result);
-                pool.query('DELETE FROM event_dep where EventID=?',[eventid],(err,result,feilds)=>{
-                    if(err){
-                        console.log(err);
-                    }else{
-                        console.log('deleted');
-                    }
-                });
-                if(Array.isArray(req.body.department)){
-                    for (var i=0; i<req.body.department.length;i++){
-                        pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
-                            if (err){
-                                console.log(err);
-                            }else{
-                                console.log('updated');
-                            }
-                        });
-                    }                
-                }else{
-                    pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department}, (err,result,feilds) => {
-                        if (err){
-                            console.log(err);
-                        }else{
-                            console.log('updated');
-                        }
-                    });
-                } 
+                
             }
-        })
-}else{
-    pool.query('UPDATE event_details SET faculty=?,Event_name=?,descp=?,guestname=?,linkedIN=?,guestmail=?,guestnum=?,mode=?,platform=?,sdt=?,edt=? where EventID=?',[req.body.faculty,req.body.event,req.body.eDescription,req.body.gName,'hello',req.body.gMail,req.body.gPhone,req.body.inlineRadioOptions,req.body.platform,req.body.dateTime[0],req.body.dateTime[1],eventid],(err,result,feilds)=>{
-        if(err){
-            console.log(err);
-        }else{
-            console.log(result);
-            pool.query('DELETE FROM event_dep where EventID=?',[eventid],(err,result,feilds)=>{
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log('deleted');
-                }
-            });
-            if(Array.isArray(req.body.department)){
-                for (var i=0; i<req.body.department.length;i++){
-                    pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
-                        if (err){
-                            console.log(err);
-                        }else{
-                            console.log('updated');
-                        }
-                    });
-                }                
+            booo=false;
+        });
+        while(booo) await sleep(10);
+        var boo = true;
+        pool.query('DELETE FROM event_dep where EventID=?',[eventid],async(err,result,feilds)=>{
+            if(err){
+                console.log(err);
             }else{
-                pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department}, (err,result,feilds) => {
+                console.log('deleted');
+            }
+            boo = false;
+        });
+        while(boo) await sleep(10);
+        if(Array.isArray(req.body.department)){
+            for (var i=0; i<req.body.department.length;i++){
+                var bool = true;
+                pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
                     if (err){
                         console.log(err);
                     }else{
                         console.log('updated');
                     }
+                    bool = false;
                 });
-            } 
+                while(bool) await sleep(10); 
+            }                
+        }else{
+            var bool = true;
+            pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department}, (err,result,feilds) => {
+                if (err){
+                    console.log(err);
+                }else{
+                    console.log('updated');
+                }
+                bool = false;
+            });
+            while(bool) await sleep(10);
+        } 
+}else{
+    
+    var booo=true;
+    pool.query('UPDATE event_details SET faculty=?,Event_name=?,descp=?,guestname=?,linkedIN=?,guestmail=?,guestnum=?,mode=?,platform=?,sdt=?,edt=? where EventID=?',[req.body.faculty,req.body.event,req.body.eDescription,req.body.gName,'hello',req.body.gMail,req.body.gPhone,req.body.inlineRadioOptions,req.body.platform,req.body.dateTime[0],req.body.dateTime[1],eventid],async(err,result,feilds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log(result);
+            
         }
-    })
+        booo=false;
+    });
+    while(booo) await sleep(10);
+    var boo = true;
+    pool.query('DELETE FROM event_dep where EventID=?',[eventid],async(err,result,feilds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log('deleted');
+        }
+        boo = false;
+    });
+    while(boo) await sleep(10);
+    if(Array.isArray(req.body.department)){
+        console.log(req.body.department);
+        for (var i=0; i<req.body.department.length;i++){
+            var bool = true;
+            pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department[i]}, (err,result,feilds) => {
+                if (err){
+                    console.log(err);
+                }else{
+                    console.log('updated');
+                }
+                bool = false;
+            });
+            while(bool) await sleep(10); 
+        }                
+    }else{
+        var bool = true;
+        pool.query('INSERT INTO event_dep SET ?', {EventID: eventid,dept:req.body.department}, (err,result,feilds) => {
+            if (err){
+                console.log(err);
+            }else{
+                console.log('updated');
+            }
+            bool = false;
+        });
+        while(bool) await sleep(10);
+    } 
 }
     res.redirect('/admin_dash2');
 });
@@ -849,6 +878,59 @@ app.post('/view_feedback',async(req,res)=>{
     res.render('view_feedback',{option1:option1,option2:option2,option3:option3,option4:option4,option5:option5,total:total,name:name,final:final,event_name:event_name});
 });
 
+app.get('register_view',async(req,res)=>{
+    var eventid = sessionstorage.getItem('session_eventid');
+    var event_name = sessionstorage.getItem('session_event_name');
+    var username = sessionstorage.getItem('username');
+    var name = sessionstorage.getItem('name');
+    var final=[];
+    var bool = true;
+    pool.query('SELECT * FROM register where EventID=?',[eventid],(err,result,feilds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log('register retrieved');
+            final=result;
+        }
+        bool = false;
+    });
+    res.render('register_view',{eventid:eventid,event_name:event_name,username:username,name:name,final:final});
+});
+
+app.post('/register_view',async(req,res)=>{
+    var eventid = req.body.eventid;
+    var event_name = req.body.event_name;
+    var username = sessionstorage.getItem('username');
+    var name = sessionstorage.getItem('name');
+    var final=[];
+    var bool = true;
+    pool.query('SELECT * FROM register where EventID=?',[eventid],(err,result,feilds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log('register retrieved');
+            final=result;
+        }
+        bool = false;
+    });
+    while(bool) await sleep(10);
+    for(var i=0;i<final.length;i++){
+        var boo = true;
+        pool.query('SELECT * FROM login where Username=?',[final[i]['username']],(err,result,feilds)=>{
+            if(err){
+                console.log(err);
+            }else{
+                final[i]['dept']=result[0]['Dept'];
+            }
+            
+            boo = false;
+        });
+        while(boo) await sleep(10);
+    }
+    console.log(final);
+    res.render('register_view',{eventid:eventid,event_name:event_name,username:username,name:name,final:final});
+});
+
 app.get('/chat_box',async(req,res)=>{
     var eventid = sessionstorage.getItem('session_eventid');
     var event_name = sessionstorage.getItem('session_event_name');
@@ -896,6 +978,22 @@ app.post('/chat_box',async(req,res)=>{
     sessionstorage.setItem('session_event_name',req.body.event_name);
     res.redirect('/chat_box');
 });
+
+app.post('/delete_event',async(req,res)=>{
+    var eventid = req.body.eventid;
+    var bool = true;
+    pool.query('DELETE FROM event_details where EventID=?',[eventid],(err,result,feilds)=>{
+        if(err){
+            console.log(err);
+        }else{
+            console.log('event deleted');
+        }
+        bool = false;
+    });
+    while(bool) await sleep(10);
+    res.redirect('/admin_dash');
+});
+
 //opening the login_alert page
 app.get('/login_alert',function(req,res){
     res.render('login',{isAlert: true});
